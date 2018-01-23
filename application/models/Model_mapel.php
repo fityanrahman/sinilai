@@ -12,11 +12,12 @@
       return $query;
     }
 
-    public function get_offset($limit, $offset)
+    // public function get_offset($limit, $offset)
+    public function get_offset()
     {
       // Jalankan query
       $query = $this->db
-        ->limit($limit, $offset)
+        // ->limit($limit, $offset)
         ->get($this->table);
  
       // Return hasil query

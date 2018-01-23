@@ -4,7 +4,6 @@
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
           <span class="card-title">Data Nilai</span>
-
           <!-- debug query -->
           <?php $query =$this->db->last_query(); ?>
           <?php print_r($query);?> 
@@ -25,6 +24,7 @@
                   <tr>
                       <th>No</th>
                       <th>Nama Siswa</th>
+                      <th>Nama Nilai</th>
                       <th>Nilai</th>
                       <th>Catatan</th>
                       <?php if($this->session->userdata('level') !== '3'): ?>
@@ -38,6 +38,7 @@
                     <tr>
                       <td><?php echo ++$no; ?></td>
                       <td><?php echo $row->nama_siswa; ?></td>
+                      <td><?php echo $row->nama_nilai; ?></td>
                       <td><?php echo $row->nilai; ?></td>
                       <td><?php echo $row->catatan; ?></td>
                       <?php if($this->session->userdata('level') !== '3'): ?>
@@ -56,7 +57,7 @@
               </tbody>
           </table>
           <div class="center-align">
-            <?php echo $this->pagination->create_links(); ?>
+            <!-- <?php// echo $this->pagination->create_links(); ?> -->
           </div>
         </div>
       </div>

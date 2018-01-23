@@ -32,7 +32,7 @@
       return $siswa;
     }
 
-    public function get_offset($limit, $offset, $where=null)
+    public function get_offset($where=null)
     {
       // Jalankan query
       if($where!==null)
@@ -40,15 +40,15 @@
         $this->db->where($where);
       }
       $query = $this->db
-        ->select('nilai.id as `id_nilai`, nama_siswa, nilai, catatan, nama_mapel')
+        ->select('nilai.id as `id_nilai`, nama_siswa, nama_nilai, nilai, catatan, nama_mapel')
         ->from('nilai')
         ->join('siswa', 'siswa.nis = nilai.idsiswa')
         ->join('kelas', 'siswa.idkelas = kelas.id')
         ->join('kat_nilai', 'nilai.idkat = kat_nilai.id')
         ->join('mapel', 'mapel.id = kat_nilai.idmapel')
-        ->join('guru', 'guru.idmapel = mapel.id', 'left')
-        ->join('user', 'guru.iduser_guru = user.id', 'left')
-        ->limit($limit, $offset);
+        ->join('guru', 'guru.idmapel_guru = mapel.id', 'left')
+        ->join('user', 'guru.iduser_guru = user.id', 'left');
+        // ->limit($limit, $offset);
  
       // Return hasil query
       return $this->db->get();
@@ -61,6 +61,9 @@
         ->select('*')
         ->from('nilai')
         ->join('siswa', 'siswa.nis = nilai.idsiswa')
+        ->join('kat_nilai', 'kat_nilai.id = nilai.idkat')
+        ->join('mapel', 'mapel.id = kat_nilai.idmapel')
+        ->join('guru', 'guru.idmapel_guru = mapel.id')
         ->where($where)
         ->get();
 

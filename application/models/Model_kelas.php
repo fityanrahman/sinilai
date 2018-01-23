@@ -21,7 +21,7 @@
       return $query->result();
     }
 
-    public function get_offset($limit, $offset)
+    public function get_offset()
     {
       // Jalankan query
       $this->db

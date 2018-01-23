@@ -21,19 +21,7 @@
                         <li><a href="<?php echo base_url('siswa'); ?>"><i class="material-icons">book</i>Siswa</a></li>
                         <?php endif; ?>
                         <li><a href="<?php echo base_url('saran'); ?>"><i class="material-icons">book</i>Saran</a></li>
-                        <!-- <li><a href="#!"><i class="material-icons">book</i>Nilai</a></li> -->
-                            <ul class="collapsible collapsible-accordion">
-                                <li>
-                                    <a class="collapsible-header"><i class="material-icons">book</i>Nilai</a>
-                                    <div class="collapsible-body">
-                                    <ul>
-                                        <li><a href="<?php echo base_url('katNilai/'); ?>">Kategori</a></li>
-                                        <li><a href="<?php echo base_url('Nilai/'); ?>">Nilai</a></li>
-                                    </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    
+                        <li><a href="<?php echo base_url('katNilai'); ?>"><i class="material-icons">book</i>Nilai</a></li>             
 
                     <!-- <li><a class="waves-effect" href="<?php echo base_url('events'); ?>"><i class="material-icons">event</i>Events</a></li> -->
                     <li><div class="divider"></div></li>

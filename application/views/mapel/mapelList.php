@@ -42,7 +42,7 @@
               </tbody>
           </table>
           <div class="center-align">
-            <?php echo $this->pagination->create_links(); ?>
+            <!-- <?php //echo $this->pagination->create_links(); ?> -->
           </div>
         </div>
       </div>

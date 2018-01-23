@@ -15,39 +15,39 @@ class Siswa extends MY_Controller {
 
   public function index()
   {
-    // Load library pagination
-    $this->load->library('pagination');
+    // // Load library pagination
+    // $this->load->library('pagination');
  
-    // Pengaturan pagination
-    $config['base_url'] = base_url('siswa/index/');
-    $config['total_rows'] = $this->model_siswa->get()->num_rows();
-    $config['per_page'] = 5;
-    $config['offset'] = $this->uri->segment(3);
+    // // Pengaturan pagination
+    // $config['base_url'] = base_url('siswa/index/');
+    // $config['total_rows'] = $this->model_siswa->get()->num_rows();
+    // $config['per_page'] = 5;
+    // $config['offset'] = $this->uri->segment(3);
  
-    // Styling pagination
-    $config['first_link'] = false;
-    $config['last_link'] = false;
+    // // Styling pagination
+    // $config['first_link'] = false;
+    // $config['last_link'] = false;
  
-    $config['full_tag_open'] = '<ul class="pagination">';
-    $config['full_tag_close'] = '</ul>';
+    // $config['full_tag_open'] = '<ul class="pagination">';
+    // $config['full_tag_close'] = '</ul>';
  
-    $config['num_tag_open'] = '<li class="waves-effect">';
-    $config['num_tag_close'] = '</li>';
+    // $config['num_tag_open'] = '<li class="waves-effect">';
+    // $config['num_tag_close'] = '</li>';
  
-    $config['prev_tag_open'] = '<li class="waves-effect">';
-    $config['prev_tag_close'] = '</li>';
+    // $config['prev_tag_open'] = '<li class="waves-effect">';
+    // $config['prev_tag_close'] = '</li>';
  
-    $config['next_tag_open'] = '<li class="waves-effect">';
-    $config['next_tag_close'] = '</li>';
+    // $config['next_tag_open'] = '<li class="waves-effect">';
+    // $config['next_tag_close'] = '</li>';
  
-    $config['cur_tag_open'] = '<li class="active"><a href="#">';
-    $config['cur_tag_close'] = '</a></li>';
+    // $config['cur_tag_open'] = '<li class="active"><a href="#">';
+    // $config['cur_tag_close'] = '</a></li>';
 
-    $this->pagination->initialize($config);
+    // $this->pagination->initialize($config);
 
     // Data untuk page index
     $data['pageTitle'] = 'Data Siswa';
-    $data['siswa'] = $this->model_siswa->get_offset($config['per_page'], $config['offset'])->result();
+    $data['siswa'] = $this->model_siswa->get_offset()->result();
     $data['pageContent'] = $this->load->view('siswa/siswaList', $data, TRUE);
 
     // Jalankan view template/layout

@@ -27,14 +27,14 @@
       return $query->result();
     }
 
-    public function get_offset($limit, $offset)
+    public function get_offset()
     {
       // Jalankan query
       $query = $this->db
         ->select('*')
         ->from('kelas')
         ->join('siswa', 'siswa.idkelas = kelas.id')
-        ->limit($limit, $offset)
+        // ->limit($limit, $offset)
         ->get();
  
       // Return hasil query

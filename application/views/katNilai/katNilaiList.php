@@ -3,7 +3,7 @@
       <div class="card">
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
-          <span class="card-title">Data Kategori Nilai</span>
+          <span class="card-title">Data Nilai</span>
           <!-- debug query -->
           <?php $query =$this->db->last_query(); ?>
           <?php print_r($query);?> 
@@ -37,7 +37,7 @@
                     <tr>
                       <td><?php echo ++$no; ?></td>
                       <td><a href="<?php echo base_url('nilai/index/'.$row->id_kat);?>"</a> <?php echo $row->nama_nilai; ?></td>
-                      <td><?php echo $row->nama_mapel; ?></td>
+                      <td><a href="<?php echo base_url('nilai/mapel/'.$row->idmapel_katnilai);?>"</a> <?php echo $row->nama_mapel; ?></td>
                       <td><?php echo $row->nama_kelas; ?></td>
                       <td><?php echo $row->tgl; ?></td>
                       <?php if($this->session->userdata('level') !== '3'): ?>
@@ -56,7 +56,7 @@
               </tbody>
           </table>
           <div class="center-align">
-            <?php echo $this->pagination->create_links(); ?>
+            <!-- <?php//echo $this->pagination->create_links(); ?> -->
           </div>
         </div>
       </div>

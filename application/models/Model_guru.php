@@ -9,7 +9,7 @@
       $this->db
         ->select('*')
         ->from('mapel')
-        ->join('guru', 'guru.idmapel = mapel.id');
+        ->join('guru', 'guru.idmapel_guru = mapel.id');
       $query = $this->db->get();
 
       // Return hasil query
@@ -31,14 +31,15 @@
       return $query->result();
     }
 
-    public function get_offset($limit, $offset)
+    // public function get_offset($limit, $offset)
+    public function get_offset()
     {
       // Jalankan query
       $query = $this->db
         ->select('*')
         ->from('mapel')
-        ->join('guru', 'guru.idmapel = mapel.id')
-        ->limit($limit, $offset)
+        ->join('guru', 'guru.idmapel_guru = mapel.id')
+        // ->limit($limit, $offset)
         ->get();
  
       // Return hasil query

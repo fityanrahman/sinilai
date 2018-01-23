@@ -17,6 +17,67 @@ class Nilai extends MY_Controller {
 
   public function index($idkat=null)
   {
+    // // Load library pagination
+    // $this->load->library('pagination');
+ 
+    // // Pengaturan pagination
+    // $config['base_url'] = base_url('nilai/index/');
+    // $config['total_rows'] = $this->model_nilai->get()->num_rows();
+    // $config['per_page'] = 5;
+    // $config['offset'] = $this->uri->segment(5);
+ 
+    // // Styling pagination
+    // $config['first_link'] = false;
+    // $config['last_link'] = false;
+ 
+    // $config['full_tag_open'] = '<ul class="pagination">';
+    // $config['full_tag_close'] = '</ul>';
+ 
+    // $config['num_tag_open'] = '<li class="waves-effect">';
+    // $config['num_tag_close'] = '</li>';
+ 
+    // $config['prev_tag_open'] = '<li class="waves-effect">';
+    // $config['prev_tag_close'] = '</li>';
+ 
+    // $config['next_tag_open'] = '<li class="waves-effect">';
+    // $config['next_tag_close'] = '</li>';
+ 
+    // $config['cur_tag_open'] = '<li class="active"><a href="#">';
+    // $config['cur_tag_close'] = '</a></li>';
+
+    // $this->pagination->initialize($config);
+
+    // Ambil data nilai dari database
+    $nilai = $this->model_nilai->get_where(array('idkat' => $idkat))->row();
+  
+
+    // Data untuk page index
+    $data['pageTitle'] = 'Data Nilai';
+    if($this->session->userdata('level') === '2'){
+        $array_where = array(
+            'idkat' =>   $idkat,
+            'iduser_guru'   => $this->session->userdata('id'),
+        );
+    $data['nilai'] = $this->model_nilai->get_offset($array_where)->result();
+    }else if ($this->session->userdata('level') === '3'){
+      $array_where = array(
+        'idkat' =>   $idkat,
+        'iduser_siswa' => $this->session->userdata('id'),
+        'idkelas' => $nilai->idkelas,
+    );
+    $data['nilai'] = $this->model_nilai->get_offset($array_where)->result();
+    // $data['nilai2'] = $nilai2;
+    } else{
+    $data['nilai'] = $this->model_nilai->get_offset(array('idkat' => $idkat))->result();
+    // $data['nilai2'] = $nilai2;
+    }
+    $data['pageContent'] = $this->load->view('nilai/nilaiList', $data, TRUE);
+
+    // Jalankan view template/layout
+    $this->load->view('incsite/layout', $data);
+  }
+
+  public function mapel($idmapel){
     // Load library pagination
     $this->load->library('pagination');
  
@@ -48,31 +109,33 @@ class Nilai extends MY_Controller {
     $this->pagination->initialize($config);
 
     // Ambil data nilai dari database
-    $nilai = $this->model_nilai->get_where(array('idkat' => $idkat))->row();
+    $nilai = $this->model_nilai->get_where(array('idmapel' => $idmapel))->row();
   
-
     // Data untuk page index
     $data['pageTitle'] = 'Data Nilai';
     if($this->session->userdata('level') === '2'){
         $array_where = array(
-            'idkat' =>   $idkat,
+            'idmapel' =>   $idmapel,
             'iduser_guru'   => $this->session->userdata('id'),
         );
-    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], $array_where)->result();
+    $data['nilai'] = $this->model_nilai->get_offset($array_where)->result();
     }else if ($this->session->userdata('level') === '3'){
       $array_where = array(
-        'idkat' =>   $idkat,
+        'idmapel' =>   $idmapel,
         'iduser_siswa' => $this->session->userdata('id'),
         'idkelas' => $nilai->idkelas,
     );
-    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], $array_where)->result();
+    $data['nilai'] = $this->model_nilai->get_offset($array_where)->result();
+    // $data['nilai2'] = $nilai2;
     } else{
-    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], array('idkat' => $idkat))->result();
+    $data['nilai'] = $this->model_nilai->get_offset(array('idmapel' => $idmapel))->result();
+    // $data['nilai2'] = $nilai2;
     }
     $data['pageContent'] = $this->load->view('nilai/nilaiList', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
+
   }
 
   public function detail($nis)
@@ -129,7 +192,11 @@ class Nilai extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data siswa';
+    // if($this->session->userdata('level') === '2'){
+    // $data['katnilai'] = $this->model_kat_nilai->get_where(array('iduser_guru' => $this->session->userdata('id')))->result();
+    // } else{
     $data['katnilai'] = $this->model_kat_nilai->get()->result();
+    // }
     $data['kelas'] = $this->model_nilai->getListKelas();
     $data['pageContent'] = $this->load->view('nilai/nilaiAdd', $data, TRUE);
 
