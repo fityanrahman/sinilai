@@ -21,22 +21,23 @@
             </div>
           <?php endif; ?>
           <div class="input-field col s12 m6">
-              <input id="nama_kelas" name="nama_kelas" type="text" value="<?php echo set_value('nama_kelas'); ?>">
-              <label for="nama_kelas" class="">Nama Kelas</label>
+              <input id="nama_nilai" name="nama_nilai" type="text" value="<?php echo set_value('nama_nilai'); ?>">
+              <label for="nama_nilai" class="">Nama Kategori Nilai</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="idwalikelas" name="idwalikelas">
-              <?php
-              foreach($walikelas as $row)
-              {
-                echo '<option value="'.$row->nip.'">'.$row->nama_guru.'</option>';
-              }
-              ?>
-              </select>
-              <label>Nama Walikelas</label>
+              <input id="tgl" class="datepicker" name="tgl" type="text" value="<?php echo set_value('tgl'); ?>">
+              <label for="tgl" class="">Tanggal Kategori Nilai</label>
+          </div>
+          <div class="input-field col s12 m6">
+              <?php if ($this->session->userdata('level') === '2'){ ?>
+              <input id="idmapel" name="idmapel" type="text" value="<?php echo $katnilai->idmapel; ?>">
+              <?php } else{ ?>
+              <input id="idmapel" name="idmapel" type="text" value="<?php echo set_value('idmapel'); ?>">
+              <?php } ?>
+              <label for="idmapel" class="">idmapel</label>
           </div>
           <div class="input-field col s12 right-align">
-              <button type="submit" name="submit" value="add_kelas" class="btn amber waves-effect waves-green">Simpan</button>
+              <button type="submit" name="submit" value="add_kat_nilai" class="btn amber waves-effect waves-green">Simpan</button>
           </div>
         </form>
       </div>

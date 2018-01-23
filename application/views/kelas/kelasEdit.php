@@ -21,12 +21,23 @@
             </div>
           <?php endif; ?>
           <div class="input-field col s12 m6">
-              <input id="nama" name="nama" type="text" value="<?php echo $kelas->nama; ?>">
-              <label for="nama" class="">Nama Kelas</label>
+              <input id="nama_kelas" name="nama_kelas" type="text" value="<?php echo $kelas->nama_kelas; ?>">
+              <label for="nama_kelas" class="">Nama Kelas</label>
           </div>
           <div class="input-field col s12 m6">
-              <input id="nama_walikelas" name="nama_walikelas" type="text" value="<?php echo $kelas->nama_walikelas; ?>">
-              <label for="nama_walikelas" class="">Nama Walikelas</label>
+              <select id="idwalikelas" name="idwalikelas">
+              <?php
+              foreach($walikelas as $row)
+              {
+                if ($kelas->idwalikelas==$row->nip){
+                  echo '<option value="'.$row->nip.'" selected>'.$row->nama_guru.'</option>';
+                } else{
+                echo "<option value='".$row->nip."'>".$row->nama_guru. "</option>";
+              }
+              }
+              ?>
+              </select>
+              <label>Nama Walikelas</label>
           </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="<?php echo $kelas->id; ?>" class="btn amber waves-effect waves-green">Simpan</button>

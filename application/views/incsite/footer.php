@@ -3,8 +3,8 @@
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
-        <h5 class="white-text title-footer">Attaqwa e-madrasah</h5>
-        <p class="grey-text text-lighten-4 child-footer">Portal online siswa madrasah Attaqwa Panyingkiran.</p>
+        <h5 class="white-text title-footer">Sistem Informasi Nilai Al-Ishlah</h5>
+        <p class="grey-text text-lighten-4 child-footer">Portal online informasi nilai santri Madrasah Diniyah Al-Ishlah</p>
       </div>
       <!-- <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
@@ -19,7 +19,7 @@
   </div>
   <div class="footer-copyright">
     <div class="container cr">
-    © 2017 Madrasah At-Taqwa Panyingkiran
+    © 2017 Madrasah Al-Ishlah 
     <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
     </div>
   </div>

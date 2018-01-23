@@ -92,11 +92,11 @@
       return $query;
     }
 
-    public function delete($ni)
+    public function delete($id)
     {
       // Jalankan query
       $query = $this->db
-        ->where('ni', $ni)
+        ->where('id', $id)
         ->delete($this->table);
       
       // Return hasil query

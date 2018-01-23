@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Siswa extends MY_Controller {
+class Nilai extends MY_Controller {
 
   public function __construct()
   {
@@ -10,19 +10,21 @@ class Siswa extends MY_Controller {
     $this->cekLogin();
 
     // Load model events
+    $this->load->model('model_nilai');
+    $this->load->model('model_kat_nilai');
     $this->load->model('model_siswa');
   }
 
-  public function index()
+  public function index($idkat=null)
   {
     // Load library pagination
     $this->load->library('pagination');
  
     // Pengaturan pagination
-    $config['base_url'] = base_url('siswa/index/');
-    $config['total_rows'] = $this->model_siswa->get()->num_rows();
+    $config['base_url'] = base_url('nilai/index/');
+    $config['total_rows'] = $this->model_nilai->get()->num_rows();
     $config['per_page'] = 5;
-    $config['offset'] = $this->uri->segment(3);
+    $config['offset'] = $this->uri->segment(5);
  
     // Styling pagination
     $config['first_link'] = false;
@@ -45,10 +47,29 @@ class Siswa extends MY_Controller {
 
     $this->pagination->initialize($config);
 
+    // Ambil data nilai dari database
+    $nilai = $this->model_nilai->get_where(array('idkat' => $idkat))->row();
+  
+
     // Data untuk page index
-    $data['pageTitle'] = 'Data Siswa';
-    $data['siswa'] = $this->model_siswa->get_offset($config['per_page'], $config['offset'])->result();
-    $data['pageContent'] = $this->load->view('siswa/siswaList', $data, TRUE);
+    $data['pageTitle'] = 'Data Nilai';
+    if($this->session->userdata('level') === '2'){
+        $array_where = array(
+            'idkat' =>   $idkat,
+            'iduser_guru'   => $this->session->userdata('id'),
+        );
+    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], $array_where)->result();
+    }else if ($this->session->userdata('level') === '3'){
+      $array_where = array(
+        'idkat' =>   $idkat,
+        'iduser_siswa' => $this->session->userdata('id'),
+        'idkelas' => $nilai->idkelas,
+    );
+    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], $array_where)->result();
+    } else{
+    $data['nilai'] = $this->model_nilai->get_offset($config['per_page'], $config['offset'], array('idkat' => $idkat))->result();
+    }
+    $data['pageContent'] = $this->load->view('nilai/nilaiList', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
@@ -75,7 +96,7 @@ class Siswa extends MY_Controller {
       
       // Mengatur validasi data nama event,
       // # required = tidak boleh kosong
-      $this->form_validation->set_rules('nama_siswa', 'Nama siswa', 'required');
+      $this->form_validation->set_rules('nilai', 'Nama siswa', 'required');
 
       // Mengatur pesan error validasi data
       $this->form_validation->set_message('required', '%s tidak boleh kosong!');
@@ -84,21 +105,15 @@ class Siswa extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
-          'nis' => $this->input->post('nis'),
-          'nama_siswa' => $this->input->post('nama_siswa'),
-          'tmp_lahir' => $this->input->post('tmp_lahir'),
-          'tgl_lahir' => date_format(date_create($this->input->post('tgl_lahir')), 'Y-m-d'),
-          'jk' => $this->input->post('jk'),
-          'alamat' => $this->input->post('alamat'),
-          'nama_ayah' => $this->input->post('nama_ayah'),
-          'nama_ibu' => $this->input->post('nama_ibu'),
-          'agama' => $this->input->post('agama'),
-          'idkelas' => $this->input->post('idkelas'),
-          'iduser_siswa' => $this->input->post('iduser_siswa'),
+          'id' => $this->input->post('id'),
+          'nilai' => $this->input->post('nilai'),
+          'catatan' => $this->input->post('catatan'),
+          'idsiswa' => $this->input->post('idsiswa'),
+          'idkat' => $this->input->post('idkat'),
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_siswa->insert($data);
+        $query = $this->model_nilai->insert($data);
 
         // cek jika query berhasil
         if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data siswa');
@@ -108,28 +123,39 @@ class Siswa extends MY_Controller {
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('siswa', 'refresh');
+        redirect('nilai/add', 'refresh');
       } 
     }
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data siswa';
-    $data['iduser'] = $this->model_siswa->getLastID()->row();
-    $data['kelas'] = $this->model_siswa->getListKelas();
-    $data['pageContent'] = $this->load->view('siswa/siswaAdd', $data, TRUE);
+    $data['katnilai'] = $this->model_kat_nilai->get()->result();
+    $data['kelas'] = $this->model_nilai->getListKelas();
+    $data['pageContent'] = $this->load->view('nilai/nilaiAdd', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
   }
 
-  public function edit($nis = null)
+  function ambil_data(){
+
+    $modul=$this->input->post('modul');
+    $id=$this->input->post('id');
+    
+    if($modul=="nama_siswa"){
+    echo $this->model_nilai->siswa($id);
+    }
+  
+    }
+
+  public function edit($id_nilai = null)
   {
     // Jika form di submit jalankan blok kode ini
     if ($this->input->post('submit')) {
       
       // Mengatur validasi data nama event,
       // # required = tidak boleh kosong
-      $this->form_validation->set_rules('nama_siswa', 'Nama siswa', 'required');
+      $this->form_validation->set_rules('nilai', 'nilai', 'required');
 
       // Mengatur pesan error validasi data
       $this->form_validation->set_message('required', '%s tidak boleh kosong!');
@@ -138,21 +164,15 @@ class Siswa extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
-          'nis' => $this->input->post('nis'),
-          'nama_siswa' => $this->input->post('nama_siswa'),
-          'tmp_lahir' => $this->input->post('tmp_lahir'),
-          'tgl_lahir' => date_format(date_create($this->input->post('tgl_lahir')), 'Y-m-d'),
-          'jk' => $this->input->post('jk'),
-          'alamat' => $this->input->post('alamat'),
-          'nama_ayah' => $this->input->post('nama_ayah'),
-          'nama_ibu' => $this->input->post('nama_ibu'),
-          'agama' => $this->input->post('agama'),
-          'idkelas' => $this->input->post('idkelas'),
-          'iduser_siswa' => $this->input->post('iduser_siswa'),
+          'id' => $this->input->post('id'),
+          'nilai' => $this->input->post('nilai'),
+          'catatan' => $this->input->post('catatan'),
+          'idsiswa' => $this->input->post('idsiswa'),
+          'idkat' => $this->input->post('idkat'),
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_siswa->update($nis, $data);
+        $query = $this->model_nilai->update($id_nilai, $data);
 
         // cek jika query berhasil
         if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui Mata Pelajaran');
@@ -162,22 +182,22 @@ class Siswa extends MY_Controller {
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('siswa/edit/'.$nis, 'refresh');
+        redirect('nilai/edit/'.$id_nilai, 'refresh');
       } 
     }
     
     // Ambil data user dari database
-    $siswa = $this->model_siswa->get_where(array('nis' => $nis))->row();
-    
+    $nilai = $this->model_nilai->get_where(array('id' => $id_nilai))->row();
+  
   
     // Jika data user tidak ada maka show 404
-    if (!$siswa) show_404();
+    if (!$nilai) show_404();
 
     // Data untuk page users/add
     $data['pageTitle'] = 'Edit Data siswa';
-    $data['siswa'] = $siswa;
-    $data['kelas'] = $this->model_siswa->getListKelas();
-    $data['pageContent'] = $this->load->view('siswa/siswaEdit', $data, TRUE);
+    $data['nilai'] = $nilai;
+    // $data['nilai'] = $this->model_siswa->getListKelas();
+    $data['pageContent'] = $this->load->view('nilai/nilaiEdit', $data, TRUE);
 
     // $search = $this->input->post('idmapel');
     // $view_data['search'] = $search;

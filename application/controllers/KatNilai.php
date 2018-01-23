@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kelas extends MY_Controller {
+class KatNilai extends MY_Controller {
 
   public function __construct()
   {
@@ -10,7 +10,7 @@ class Kelas extends MY_Controller {
     $this->cekLogin();
 
     // Load model events
-    $this->load->model('model_kelas');
+    $this->load->model('model_kat_nilai');
   }
 
   public function index()
@@ -19,9 +19,9 @@ class Kelas extends MY_Controller {
     $this->load->library('pagination');
  
     // Pengaturan pagination
-    $config['base_url'] = base_url('kelas/index/');
-    $config['total_rows'] = $this->model_kelas->get()->num_rows();
-    $config['per_page'] = 9;
+    $config['base_url'] = base_url('katnilai/index/');
+    $config['total_rows'] = $this->model_kat_nilai->get()->num_rows();
+    $config['per_page'] = 5;
     $config['offset'] = $this->uri->segment(3);
  
     // Styling pagination
@@ -45,10 +45,32 @@ class Kelas extends MY_Controller {
 
     $this->pagination->initialize($config);
 
+    // Ambil data nilai dari database
+    // $katnilai = $this->model_kat_nilai->get_where(array('id' => $id))->row();
+
     // Data untuk page index
-    $data['pageTitle'] = 'Kelas';
-    $data['kelas'] = $this->model_kelas->get_offset($config['per_page'], $config['offset'])->result();
-    $data['pageContent'] = $this->load->view('kelas/kelasList', $data, TRUE);
+    $data['pageTitle'] = 'Data Kategori Nilai';
+    if($this->session->userdata('level') !== '1'){
+      $data['kat_nilai'] = $this->model_kat_nilai->get_offset($config['per_page'], $config['offset'],$this->session->userdata('id'))->result();
+    } else{
+      $data['kat_nilai'] = $this->model_kat_nilai->get_offset($config['per_page'], $config['offset'])->result();
+    }
+    
+    $data['pageContent'] = $this->load->view('katNilai/katNilaiList', $data, TRUE);
+
+    // Jalankan view template/layout
+    $this->load->view('incsite/layout', $data);
+  }
+
+  public function detail($id)
+  {
+
+    // Ambil data user dari database
+
+    // Data untuk page detail
+    $data['pageTitle'] = 'Data kat_nilai';
+    $data['kat_nilai'] = $this->model_kat_nilai->get_where(array('id' => $id))->row();
+    $data['pageContent'] = $this->load->view('katnilai/kat_nilaiDetail', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
@@ -61,7 +83,7 @@ class Kelas extends MY_Controller {
       
       // Mengatur validasi data nama event,
       // # required = tidak boleh kosong
-      $this->form_validation->set_rules('nama_kelas', 'Nama Kelas', 'required');
+      $this->form_validation->set_rules('nama_nilai', 'Nama_nilai', 'required');
 
       // Mengatur pesan error validasi data
       $this->form_validation->set_message('required', '%s tidak boleh kosong!');
@@ -70,29 +92,32 @@ class Kelas extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
-          'nama_kelas' => $this->input->post('nama_kelas'),
-          'idwalikelas' => $this->input->post('idwalikelas'),
+          'id' => $this->input->post('id'),
+          'nama_nilai' => $this->input->post('nama_nilai'),
+          'tgl' => date_format(date_create($this->input->post('tgl')), 'Y-m-d'),
+          'idmapel' => $this->input->post('idmapel'),
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_kelas->insert($data);
+        $query = $this->model_kat_nilai->insert($data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Kelas');
-        else $message = array('status' => true, 'message' => 'Gagal menambahkan Kelas');
+        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data kat_nilai');
+        else $message = array('status' => true, 'message' => 'Gagal menambahkan Data kat_nilai');
 
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('kelas/add', 'refresh');
+        redirect('katnilai/add', 'refresh');
       } 
     }
     
     // Data untuk page users/add
-    $data['pageTitle'] = 'Tambah Data Kelas';
-    $data['walikelas'] = $this->model_kelas->getListWalikelas();
-    $data['pageContent'] = $this->load->view('kelas/kelasAdd', $data, TRUE);
+    $data['pageTitle'] = 'Tambah Data Kategori Nilai';
+    $data['katnilai'] = $this->model_kat_nilai->get_idmapel($this->session->userdata('id'))->row();
+    // $data['katnilai'] = $this->model_kat_nilai->getListKatNilai($this->session->userdata('id'))->result();
+    $data['pageContent'] = $this->load->view('katnilai/katnilaiadd', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
@@ -105,7 +130,7 @@ class Kelas extends MY_Controller {
       
       // Mengatur validasi data nama event,
       // # required = tidak boleh kosong
-      $this->form_validation->set_rules('nama', 'Nama Kelas', 'required');
+      $this->form_validation->set_rules('nama_nilai', 'Nama_nilai', 'required');
 
       // Mengatur pesan error validasi data
       $this->form_validation->set_message('required', '%s tidak boleh kosong!');
@@ -114,37 +139,42 @@ class Kelas extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
-          'nama' => $this->input->post('nama'),
-          'nama_walikelas' => $this->input->post('nama_walikelas'),
+          'id' => $this->input->post('id'),
+          'nama_nilai' => $this->input->post('nama_nilai'),
+          'tgl' => date_format(date_create($this->input->post('tgl')), 'Y-m-d'),
+          'idmapel' => $this->input->post('idmapel'),
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_kelas->update($id, $data);
+        $query = $this->model_kat_nilai->update($id, $data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui Kelas');
-        else $message = array('status' => true, 'message' => 'Gagal memperbarui Kelas');
+        if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui Mata Pelajaran');
+        else $message = array('status' => true, 'message' => 'Gagal memperbarui Mata Pelajaran');
 
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('kelas/edit/'.$id, 'refresh');
+        redirect('KatNilai/edit/'.$id, 'refresh');
       } 
     }
     
     // Ambil data user dari database
-    $kelas = $this->model_kelas->get_where(array('id' => $id))->row();
+    $kat_nilai = $this->model_kat_nilai->get_where(array('id' => $id))->row();
     
   
     // Jika data user tidak ada maka show 404
-    if (!$kelas) show_404();
+    if (!$kat_nilai) show_404();
 
     // Data untuk page users/add
-    $data['pageTitle'] = 'Edit Data Kelas';
-    $data['kelas'] = $kelas;
-    $data['walikelas'] = $this->model_kelas->getListWalikelas();
-    $data['pageContent'] = $this->load->view('kelas/kelasEdit', $data, TRUE);
+    $data['pageTitle'] = 'Edit Data kat_nilai';
+    $data['kat_nilai'] = $kat_nilai;
+    // $data['kelas'] = $this->model_kat_nilai->getListKelas();
+    $data['pageContent'] = $this->load->view('katNilai/katNilaiEdit', $data, TRUE);
+
+    // $search = $this->input->post('idmapel');
+    // $view_data['search'] = $search;
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
@@ -153,13 +183,13 @@ class Kelas extends MY_Controller {
   public function delete($id)
   {
     // Ambil data user dari database
-    $user = $this->model_kelas->get_where(array('id' => $id))->row();
+    $kat_nilai = $this->model_kat_nilai->get_where(array('id' => $id))->row();
 
     // Jika data user tidak ada maka show 404
-    if (!$user) show_404();
+    if (!$kat_nilai) show_404();
 
     // Jalankan function delete pada model_events
-    $query = $this->model_kelas->delete($id);
+    $query = $this->model_kat_nilai->delete($id);
 
     // cek jika query berhasil
     if ($query) $message = array('status' => true, 'message' => 'Berhasil menghapus event');
@@ -169,6 +199,6 @@ class Kelas extends MY_Controller {
     $this->session->set_flashdata('message', $message);
 
     // refresh page
-    redirect('kelas', 'refresh');
+    redirect('katnilai', 'refresh');
   }
 }

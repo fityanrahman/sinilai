@@ -72,6 +72,10 @@
               </select>
               <label>Kelas</label>
           </div>
+          <div hidden class="input-field col s12 m6">
+              <input id="iduser_siswa" name="iduser_siswa" type="text" value="<?php echo $iduser->id; ?>">
+              <label for="iduser_siswa" class="">IDuser</label>
+          </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="add_siswa" class="btn amber waves-effect waves-green">Simpan</button>
           </div>

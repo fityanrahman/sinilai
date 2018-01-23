@@ -33,8 +33,8 @@
                       <td class="center-align"><?php echo $row->active; ?></td>
                       <td class="center-align"><?php echo $row->last_login; ?></td>
                       <td class="center-align">
-                        <a href="<?php echo base_url('user/edit/' . $row->ni); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Edit Data"><i class="material-icons">edit</i></a>
-                        <a href="<?php echo base_url('user/delete/' . $row->ni); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Delete Data"><i class="material-icons">delete</i></a>
+                        <a href="<?php echo base_url('user/edit/' . $row->id); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Edit Data"><i class="material-icons">edit</i></a>
+                        <a href="<?php echo base_url('user/delete/' . $row->id); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Delete Data"><i class="material-icons">delete</i></a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

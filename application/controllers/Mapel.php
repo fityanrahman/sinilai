@@ -21,7 +21,7 @@ class Mapel extends MY_Controller {
     // Pengaturan pagination
     $config['base_url'] = base_url('mapel/index/');
     $config['total_rows'] = $this->model_mapel->get()->num_rows();
-    $config['per_page'] = 5;
+    $config['per_page'] = 8;
     $config['offset'] = $this->uri->segment(3);
  
     // Styling pagination

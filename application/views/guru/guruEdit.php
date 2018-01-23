@@ -75,11 +75,19 @@
               <?php
               foreach($mapel as $row)
               {
+                if ($guru->idmapel==$row->id){
+                echo '<option value="'.$row->id.'" selected>'.$row->nama_mapel.'</option>';
+              } else {
                 echo '<option value="'.$row->id.'">'.$row->nama_mapel.'</option>';
               }
+            }
               ?>
               </select>
               <label>Mata Pelajaran</label>
+          </div>
+          <div class="input-field col s12 m6">
+              <input id="iduser_siswa" name="iduser_siswa" type="text" value="<?php echo $guru->iduser_guru; ?>">
+              <label for="iduser_siswa" class="">IDuser</label>
           </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="<?php echo $guru->nip; ?>" class="btn amber waves-effect waves-green">Simpan</button>

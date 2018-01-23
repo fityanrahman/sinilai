@@ -66,11 +66,19 @@
               <?php
               foreach($kelas as $row)
               {
+                if ($siswa->idkelas==$row->id){
+                echo '<option value="'.$row->id.'" selected>'.$row->nama_kelas.'</option>';
+                } else {
                 echo '<option value="'.$row->id.'">'.$row->nama_kelas.'</option>';
               }
+            }
               ?>
               </select>
               <label>Kelas</label>
+          </div>
+          <div hidden class="input-field col s12 m6">
+              <input id="iduser_siswa" name="iduser_siswa" type="text" value="<?php echo $siswa->iduser_siswa; ?>">
+              <label for="iduser_siswa" class="">IDuser</label>
           </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="<?php echo $siswa->nis; ?>" class="btn amber waves-effect waves-green">Simpan</button>

@@ -29,7 +29,7 @@
                     <tr>
                       <td><?php echo ++$no; ?></td>
                       <td><?php echo $row->nama_kelas; ?></td>
-                      <td><?php echo $row->nama_walikelas; ?></td>
+                      <td><?php echo $row->nama_guru; ?></td>
                       <td class="center-align">
                         <a href="<?php echo base_url('kelas/edit/' . $row->id); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Edit Data"><i class="material-icons">edit</i></a>
                         <a href="<?php echo base_url('kelas/delete/' . $row->id); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Delete Data"><i class="material-icons">delete</i></a>

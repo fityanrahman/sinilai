@@ -21,7 +21,7 @@ class Guru extends MY_Controller {
     // Pengaturan pagination
     $config['base_url'] = base_url('guru/index/');
     $config['total_rows'] = $this->model_guru->get()->num_rows();
-    $config['per_page'] = 5;
+    $config['per_page'] = 8;
     $config['offset'] = $this->uri->segment(3);
  
     // Styling pagination
@@ -81,6 +81,7 @@ class Guru extends MY_Controller {
           'tlp' => $this->input->post('tlp'),
           'email' => $this->input->post('email'),
           'idmapel' => $this->input->post('idmapel'),
+          'iduser_guru' => $this->input->post('iduser_guru'),
         );
 
         // Jalankan function insert pada model_events
@@ -100,6 +101,7 @@ class Guru extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data Guru';
+    $data['iduser'] = $this->model_guru->getLastID()->row();
     $data['mapel'] = $this->model_guru->getListMapel();
     $data['pageContent'] = $this->load->view('guru/guruAdd', $data, TRUE);
 
@@ -134,6 +136,7 @@ class Guru extends MY_Controller {
           'tlp' => $this->input->post('tlp'),
           'email' => $this->input->post('email'),
           'idmapel' => $this->input->post('idmapel'),
+          'iduser_guru' => $this->input->post('iduser_guru'),
         );
 
         // Jalankan function insert pada model_events

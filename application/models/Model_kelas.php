@@ -6,19 +6,29 @@
     public function get()
     {
       // Jalankan query
-      $query = $this->db->get($this->table);
-
+      $this->db
+        ->select('*')
+        ->from('guru')
+        ->join('kelas', 'kelas.idwalikelas = guru.nip', 'left');
+      $query = $this->db->get();
       // Return hasil query
       return $query;
+    }
+
+    public function getListWalikelas()
+    {
+      $query = $this->db->query('SELECT * FROM guru');
+      return $query->result();
     }
 
     public function get_offset($limit, $offset)
     {
       // Jalankan query
-      $query = $this->db
-        ->limit($limit, $offset)
-        ->get($this->table);
- 
+      $this->db
+        ->select('*')
+        ->from('guru')
+        ->join('kelas', 'kelas.idwalikelas = guru.nip');
+      $query = $this->db->get();
       // Return hasil query
       return $query;
     }

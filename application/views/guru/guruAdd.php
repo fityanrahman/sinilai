@@ -81,6 +81,10 @@
               </select>
               <label>Mata Pelajaran</label>
           </div>
+          <div class="input-field col s12 m6">
+              <input id="iduser_guru" name="iduser_guru" type="text" value="<?php echo $iduser->id; ?>">
+              <label for="iduser_guru" class="">IDuser</label>
+          </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="add_guru" class="btn amber waves-effect waves-green">Simpan</button>
           </div>

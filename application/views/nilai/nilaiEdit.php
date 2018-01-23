@@ -21,30 +21,27 @@
             </div>
           <?php endif; ?>
           <div class="input-field col s12 m6">
-              <input id="username" name="username" type="text" value="<?php echo $user->username; ?>">
-              <label for="username" class="">Username</label>
+              <input id="id" name="id" type="text" value="<?php echo $nilai->id; ?>">
+              <label for="id" class="">idNilai</label>
           </div>
           <div class="input-field col s12 m6">
-              <input id="password" name="password" type="password" value="">
-              <label for="password" class="">Password</label>
+              <input id="idsiswa" name="idsiswa" type="text" value="<?php echo $nilai->idsiswa; ?>">
+              <label for="idsiswa" class="">idSiswa</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="level" name="level">
-                  <option <?php echo ($user->level === '1') ? 'selected' : ''; ?> value="1">Admin</option>
-                  <option <?php echo ($user->level === '2') ? 'selected' : ''; ?> value="2">Guru</option>
-                  <option <?php echo ($user->level === '3') ? 'selected' : ''; ?> value="3">Siswa</option>
-              </select>
-              <label>Pilih Level</label>
+              <input id="idkat" name="idkat" type="text" value="<?php echo $nilai->idkat; ?>">
+              <label for="idkat" class="">idKat</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="active" name="active">
-                  <option <?php echo ($user->active === '0') ? 'selected' : ''; ?> value="0">Tidak</option>
-                  <option <?php echo ($user->active === '1') ? 'selected' : ''; ?> value="1">Ya</option>
-              </select>
-              <label>Active</label>
+              <input id="nilai" name="nilai" type="text" value="<?php echo $nilai->nilai; ?>">
+              <label for="nilai" class="">Nilai</label>
+          </div>
+          <div class="input-field col s12 m6">
+              <input id="catatan"  name="catatan" type="text" value="<?php echo $nilai->catatan; ?>">
+              <label for="catatan" class="">Catatan</label>
           </div>
           <div class="input-field col s12 right-align">
-              <button type="submit" name="submit" value="<?php echo $user->id; ?>" class="btn amber waves-effect waves-green">Simpan</button>
+              <button type="submit" name="submit" value="<?php echo $nilai->nis; ?>" class="btn amber waves-effect waves-green">Simpan</button>
           </div>
         </form>
       </div>

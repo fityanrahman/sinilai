@@ -5,69 +5,68 @@ class Saran extends MY_Controller {
   public function __construct()
   {
     parent::__construct();
+
+    $this->load->helper(array('form'));
     
     // Cek apakah user sudah login
     $this->cekLogin();
 
+    //
+    $this->user = $this->db->get_where('user', array('id' => $this->session->userdata['id']), 1)->row();
+
+
     // Load model events
-    $this->load->model('model_saran');
+    // $this->load->model('model_saran');
   }
 
   public function index()
   {
     // Data untuk page index
     $data['pageTitle'] = 'Saran';
+    $data['teman'] = $this->db->where('id !=', $this->session->userdata('id'))->get('user');
+    // $data['pageContent'] = $this->load->view('saran/saran', array(
+    //   'teman' => $teman, 
+    // ));
     $data['pageContent'] = $this->load->view('saran/saran', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
   }
 
-  public function add()
-  {
-    // Jika form di submit jalankan blok kode ini
-    if ($this->input->post('submit')) {
-      
-      // Mengatur validasi data nama event,
-      // # required = tidak boleh kosong
-      $this->form_validation->set_rules('perihal', 'perihal', 'required');
+  public function getChats()
+    {
+        header('Content-Type: application/json');
+        if ($this->input->is_ajax_request()) {
+            // Find friend
+            $friend = $this->db->get_where('user', array('id' => $this->input->post('chatWith')), 1)->row();
 
-      // Mengatur validasi data contact,
-      // # required = tidak boleh kosong
-      $this->form_validation->set_rules('saran', 'saran', 'required');
+            // Get Chats
+            $sarans = $this->db
+                ->select('saran.*, user.username')
+                ->from('saran')
+                ->join('user', 'saran.send_by = user.id')
+                ->where('(send_by = '. $this->user->id .' AND send_to = '. $friend->id .')')
+                ->or_where('(send_to = '. $this->user->id .' AND send_by = '. $friend->id .')')
+                ->order_by('saran.time', 'desc')
+                ->limit(100)
+                ->get()
+                ->result();
 
-      // Mengatur pesan error validasi data
-      $this->form_validation->set_message('required', '%s tidak boleh kosong!');
-
-      // Jalankan validasi jika semuanya benar maka lanjutkan
-      if ($this->form_validation->run() === TRUE) {
-
-        $data = array(
-          'perihal' => $this->input->post('perihal'),
-          'saran' => $this->input->post('saran'),
-        );
-
-        // Jalankan function insert pada model_events
-        $query = $this->model_saran->insert($data);
-
-        // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan saran<br>Terima Kasih :)');
-        else $message = array('status' => true, 'message' => 'Gagal menambahkan saran');
-
-        // simpan message sebagai session
-        $this->session->set_flashdata('message', $message);
-
-        // refresh page
-        redirect('saran', 'refresh');   
-      } 
+            $result = array(
+                'username' => $friend->username,
+                'sarans' => $sarans
+            );
+            echo json_encode($result);
+        }
     }
 
-    // Data untuk page user/add
-    $data['pageTitle'] = 'Tambah Data Saran';
-    $data['pageContent'] = $this->load->view('saran/saran', $data, TRUE);
-
-    // Jalankan view template/layout
-    $this->load->view('incsite/layout', $data);
-  }
+    public function sendMessage()
+    {
+        $this->db->insert('saran', array(
+            'message' => htmlentities($this->input->post('message', true)),
+            'send_to' => $this->input->post('chatWith'),
+            'send_by' => $this->user->id
+        ));
+    }
 
 }

@@ -20,31 +20,28 @@
               </div>
             </div>
           <?php endif; ?>
-          <div class="input-field col s12 m6">
-              <input id="username" name="username" type="text" value="<?php echo $user->username; ?>">
-              <label for="username" class="">Username</label>
+          <div hidden class="input-field col s12 m6">
+              <input id="id" name="id" type="text" value="<?php echo $kat_nilai->id; ?>">
+              <label for="id" class="">id</label>
           </div>
           <div class="input-field col s12 m6">
-              <input id="password" name="password" type="password" value="">
-              <label for="password" class="">Password</label>
+              <input id="nama_nilai" name="nama_nilai" type="text" value="<?php echo $kat_nilai->nama_nilai; ?>">
+              <label for="nama_nilai" class="">Nama Kategori Nilai</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="level" name="level">
-                  <option <?php echo ($user->level === '1') ? 'selected' : ''; ?> value="1">Admin</option>
-                  <option <?php echo ($user->level === '2') ? 'selected' : ''; ?> value="2">Guru</option>
-                  <option <?php echo ($user->level === '3') ? 'selected' : ''; ?> value="3">Siswa</option>
-              </select>
-              <label>Pilih Level</label>
+              <input id="tgl" class="datepicker" name="tgl" type="text" value="<?php echo $kat_nilai->tgl; ?>">
+              <label for="tgl" class="">Tanggal</label>
           </div>
+          <?php if ($this->session->userdata('level') === '2'){ ?>
+          <div hidden class="input-field col s12 m6">
+          <?php } else{ ?>
           <div class="input-field col s12 m6">
-              <select id="active" name="active">
-                  <option <?php echo ($user->active === '0') ? 'selected' : ''; ?> value="0">Tidak</option>
-                  <option <?php echo ($user->active === '1') ? 'selected' : ''; ?> value="1">Ya</option>
-              </select>
-              <label>Active</label>
+          <?php } ?>
+              <input id="idmapel" name="idmapel" type="text" value="<?php echo $kat_nilai->idmapel; ?>">
+              <label for="idmapel" class="">ID mapel</label>
           </div>
           <div class="input-field col s12 right-align">
-              <button type="submit" name="submit" value="<?php echo $user->id; ?>" class="btn amber waves-effect waves-green">Simpan</button>
+              <button type="submit" name="submit" value="<?php echo $kat_nilai->id; ?>" class="btn amber waves-effect waves-green">Simpan</button>
           </div>
         </form>
       </div>

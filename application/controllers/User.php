@@ -28,8 +28,9 @@ class User extends MY_Controller {
     $this->load->view('incsite/layout', $data);
   }
 
-  public function add()
+  public function add($alamat=null)
   {
+    $this->session->set_userdata('alamat', $this->agent->referrer());
     // Jika form di submit jalankan blok kode ini
     if ($this->input->post('submit')) {
       
@@ -38,7 +39,7 @@ class User extends MY_Controller {
       // # min_length[5] = username harus terdiri dari minimal 5 karakter
       // # is_unique[user.username] = username harus bernilai unique, 
       //   tidak boleh sama dengan record yg sudah ada pada tabel user
-      $this->form_validation->set_rules('ni', 'Ni', 'required|min_length[5]|is_unique[user.ni]|is_unique[user.ni]');
+      // $this->form_validation->set_rules('id', 'Id', 'required|min_length[5]|is_unique[user.ni]|is_unique[user.ni]');
 
       // Mengatur validasi data username,
       // # required = tidak boleh kosong
@@ -49,8 +50,8 @@ class User extends MY_Controller {
 
       // Mengatur validasi data password,
       // # required = tidak boleh kosong
-      // # min_length[5] = password harus terdiri dari minimal 5 karakter
-      $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+      // # min_length[3] = password harus terdiri dari minimal 3 karakter
+      $this->form_validation->set_rules('password', 'Password', 'required|min_length[3]');
 
       // Mengatur validasi data level,
       // # required = tidak boleh kosong
@@ -72,7 +73,7 @@ class User extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
-          'ni' => $this->input->post('ni'),
+          'id' => $this->input->post('id'),
           'username' => $this->input->post('username'),
           'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
           'level' => $this->input->post('level'),
@@ -82,27 +83,49 @@ class User extends MY_Controller {
         // Jalankan function insert pada model_user
         $query = $this->model_user->insert($data);
 
-        // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan user');
-        else $message = array('status' => true, 'message' => 'Gagal menambahkan user');
+        $ket='';
+        if ($alamat=='guru'){
+          $ket='guru';
+        } else if ($alamat=='siswa'){
+          $ket='siswa';
+        } else if ($alamat=='admin'){
+          $ket='admin';
+        }
 
+
+        // cek jika query berhasil
+        if ($query) {
+          $message = array('status' => true, 'message' => 'Berhasil menambahkan user '.$ket);
+        } else {
+          $message = array('status' => true, 'message' => 'Gagal menambahkan user '.$ket);
+        }
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
 
+
+        if ($alamat=='guru'){
+          redirect('guru/add', 'refresh');
+        } else if ($alamat=='siswa'){
+          redirect('siswa/add', 'refresh');
+        } else {
         // refresh page
         redirect('user/add', 'refresh');
+        }
+
+        
       } 
     }
     
     // Data untuk page user/add
     $data['pageTitle'] = 'Tambah Data User';
+    $data['ket'] = $alamat;
     $data['pageContent'] = $this->load->view('user/userAdd', $data, TRUE);
 
     // Jalankan view template/layout
     $this->load->view('incsite/layout', $data);
   }
 
-  public function edit($ni = null)
+  public function edit($id = null)
   {
     // Jika form di submit jalankan blok kode ini
     if ($this->input->post('submit')) {
@@ -114,8 +137,8 @@ class User extends MY_Controller {
 
       // Mengatur validasi data password,
       // # required = tidak boleh kosong
-      // # min_length[5] = password harus terdiri dari minimal 5 karakter
-      $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+      // # min_length[3] = password harus terdiri dari minimal 3 karakter
+      $this->form_validation->set_rules('password', 'Password', 'required|min_length[3]');
 
       // Mengatur validasi data level,
       // # required = tidak boleh kosong
@@ -144,7 +167,7 @@ class User extends MY_Controller {
         );
 
         // Jalankan function insert pada model_user
-        $query = $this->model_user->update($ni, $data);
+        $query = $this->model_user->update($id, $data);
 
         // cek jika query berhasil
         if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui user');
@@ -154,12 +177,12 @@ class User extends MY_Controller {
         $this->session->set_flashdata('message', $message);
 
         // refresh page
-        redirect('user/edit/'.$ni, 'refresh');
+        redirect('user/edit/'.$id, 'refresh');
       } 
     }
     
     // Ambil data user dari database
-    $user = $this->model_user->get_where(array('ni' => $ni))->row();
+    $user = $this->model_user->get_where(array('id' => $id))->row();
 
     // Jika data user tidak ada maka show 404
     if (!$user) show_404();
@@ -173,16 +196,16 @@ class User extends MY_Controller {
     $this->load->view('incsite/layout', $data);
   }
 
-  public function delete($ni)
+  public function delete($id)
   {
     // Ambil data user dari database
-    $user = $this->model_user->get_where(array('ni' => $ni))->row();
+    $user = $this->model_user->get_where(array('id' => $id))->row();
 
     // Jika data user tidak ada maka show 404
     if (!$user) show_404();
 
     // Jalankan function delete pada model_user
-    $query = $this->model_user->delete($ni);
+    $query = $this->model_user->delete($id);
 
     // cek jika query berhasil
     if ($query) $message = array('status' => true, 'message' => 'Berhasil menghapus user');

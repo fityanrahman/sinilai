@@ -16,6 +16,15 @@
       return $query;
     }
 
+    public function getLastID()
+    {
+      // Jalankan query
+      $query = $this->db->query('SELECT * FROM user ORDER BY id DESC LIMIT 1');
+
+      // Return hasil query
+      return $query;
+    }
+
     public function getListMapel()
     {
       $query = $this->db->query('SELECT * FROM mapel');
