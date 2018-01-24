@@ -8,32 +8,32 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs tabs-fixed-width">
-              <li class="tab col s3"><a class="active" href="#basic-tab">Basic Information</a></li>
-              <li class="tab col s3"><a href="#password-tab">Change Password</a></li>
+              <!-- <li class="tab col s3"><a class="active" href="#basic-tab">Basic Information</a></li> -->
+              <li class="tab col s3"><a href="#password-tab">Ganti Password</a></li>
             </ul>
           </div>
-          <div id="basic-tab" class="col s12">
+          <!-- <div id="basic-tab" class="col s12">
             <form class="row" id="basic-form" method="post" action="" style="margin-top: 20px;" enctype="multipart/form-data">
-              <?php if(validation_errors()): ?>
+              <?php //if(validation_errors()): ?>
                 <div class="col s12">
                   <div class="card-panel red">
-                    <span class="white-text"><?php echo validation_errors('<p>', '</p>'); ?></span>
+                    <span class="white-text"><?php// echo validation_errors('<p>', '</p>'); ?></span>
                   </div>
                 </div>
-              <?php endif; ?>
-              <?php if($message = $this->session->flashdata('message_profile')): ?>
+              <?php //endif; ?>
+              <?php //if($message = $this->session->flashdata('message_profile')): ?>
                 <div class="col s12">
-                  <div class="card-panel <?php echo ($message['status']) ? 'green' : 'red'; ?>">
-                    <span class="white-text"><?php echo $message['message']; ?></span>
+                  <div class="card-panel <?php //echo ($message['status']) ? 'green' : 'red'; ?>">
+                    <span class="white-text"><?php //echo $message['message']; ?></span>
                   </div>
                 </div>
-              <?php endif; ?>
+              <?php //endif; ?>
               <div class="input-field col s12 m6">
-                  <input id="nama" name="nama" type="text" value="<?php echo $this->session->userdata('nama'); ?>">
+                  <input id="nama" name="nama" type="text" value="<?php// echo $this->session->userdata('nama'); ?>">
                   <label for="nama" class="">Nama</label>
               </div>
               <div class="input-field col s12 m6">
-                  <input id="alamat" name="alamat" type="text" value="<?php echo $this->session->userdata('alamat'); ?>">
+                  <input id="alamat" name="alamat" type="text" value="<?php// echo $this->session->userdata('alamat'); ?>">
                   <label for="alamat" class="">Contact Person</label>
               </div>
               <div class="input-field file-field col s12 m6">
@@ -46,14 +46,14 @@
                 </div>
               </div>
               <div class="input-field col s12 m6">
-                  <input id="telp" name="telp" type="number" value="<?php echo $this->session->userdata('telp'); ?>">
+                  <input id="telp" name="telp" type="number" value="<?php// echo $this->session->userdata('telp'); ?>">
                   <label for="telp" class="">No. Telepon</label>
               </div>
               <div class="input-field col s12 right-align">
                   <button type="submit" name="submit-information" value="true" class="btn amber waves-effect waves-green">Simpan</button>
               </div>
             </form>
-          </div>
+          </div> -->
           <div id="password-tab" class="col s12">
             <form class="row" id="password-form" method="post" action="" style="margin-top: 20px;">
               <?php if(validation_errors()): ?>

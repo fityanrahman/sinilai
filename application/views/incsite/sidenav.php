@@ -15,23 +15,21 @@
                         </div></li>
                         <li><a href="<?php echo base_url()?>"><i class="material-icons">home</i>Beranda</a></li>
                         <?php if($this->session->userdata('level') === '1'): ?>
-                        <li><a href="<?php echo base_url('guru'); ?>"><i class="material-icons">book</i>Guru</a></li>
+                        <li><a href="<?php echo base_url('guru'); ?>"><i class="material-icons">accessibility</i>Guru</a></li>
                         <li><a href="<?php echo base_url('mapel'); ?>"><i class="material-icons">book</i>Mapel</a></li>
-                        <li><a href="<?php echo base_url('kelas'); ?>"><i class="material-icons">book</i>Kelas</a></li>
-                        <li><a href="<?php echo base_url('siswa'); ?>"><i class="material-icons">book</i>Siswa</a></li>
+                        <li><a href="<?php echo base_url('kelas'); ?>"><i class="material-icons">kitchen</i>Kelas</a></li>
+                        <li><a href="<?php echo base_url('siswa'); ?>"><i class="material-icons">group</i>Siswa</a></li>
                         <?php endif; ?>
-                        <li><a href="<?php echo base_url('saran'); ?>"><i class="material-icons">book</i>Saran</a></li>
-                        <li><a href="<?php echo base_url('katNilai'); ?>"><i class="material-icons">book</i>Nilai</a></li>             
+                        <li><a href="<?php echo base_url('saran'); ?>"><i class="material-icons">lightbulb_outline</i>Saran</a></li>
+                        <li><a href="<?php echo base_url('katNilai'); ?>"><i class="material-icons">assignment</i>Nilai</a></li>             
 
                     <!-- <li><a class="waves-effect" href="<?php echo base_url('events'); ?>"><i class="material-icons">event</i>Events</a></li> -->
                     <li><div class="divider"></div></li>
-                    <li><a class="subheader">Subheader</a></li>
+                    <li><a class="subheader">Menu Lainnya</a></li>
                     <?php if($this->session->userdata('level') === '1'): ?>
-                    <li><a class="waves-effect" href="<?php echo base_url('user'); ?>"><i class="material-icons">people</i>Users</a></li>
+                    <li><a class="waves-effect" href="<?php echo base_url('user'); ?>"><i class="material-icons">people</i>Pengguna</a></li>
                     <?php endif; ?>
-                    <li><a class="waves-effect" href="<?php echo base_url('profile'); ?>"><i class="material-icons">person</i>Profile</a></li>
-
-                    <li><a class="waves-effect" href="<?php echo base_url('saran/add'); ?>"><i class="material-icons">lightbulb_outline</i>Saran</a></li>
+                    <li><a class="waves-effect" href="<?php echo base_url('profile'); ?>"><i class="material-icons">settings</i>Pengaturan</a></li>
                     <li><a class="waves-effect" href="<?php echo base_url().'auth/logout'?>"><i class="material-icons">power_settings_new</i>Sign Out</a></li>
 
                 </ul>

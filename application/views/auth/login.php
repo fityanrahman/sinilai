@@ -18,8 +18,19 @@
     </head>
 
   <body>
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="<?php echo base_url(); ?>" class="brand-logo">Taqwa Codeigniter</a></div>
+  <style>
+    body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+  </style>
+    <nav role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="<?php echo base_url(); ?>" class="brand-logo">SINILAI AL-ISHLAH</a></div>
     </nav>
         
     <main>
@@ -58,10 +69,10 @@
       </div>
     </main>
 
-    <footer class="page-footer white">
-      <div class="footer-copyright  blue darken-3">
+    <footer class="page-footer">
+      <div class="footer-copyright">
         <div class="container center-align">
-          Copyright &copy; <a class="white-text text-lighten-3" href="https://fityanrahman.me">Taqwa Interactive Software</a>
+          <a class="white-text text-lighten-3" href="https://fityanrahman.me">Made With 	&hearts; Madrasah Diniyyah Al-Ishlah 2018</a>
         </div>
       </div>
     </footer>
