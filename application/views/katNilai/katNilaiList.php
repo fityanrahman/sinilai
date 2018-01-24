@@ -8,7 +8,9 @@
           <!-- <?php// $query =$this->db->last_query(); ?> -->
           <!-- <?php// print_r($query);?>  -->
           <!-- debug query -->
+          <?php if($this->session->userdata('level') !== '3'): ?>
           <a href="<?php echo base_url('katNilai/add'); ?>" class="btn-floating right waves-effect waves-light amber tooltipped" data-position="top" data-tooltip="Tambah Data"><i class="material-icons">add</i></a>
+          <?php endif; ?>
         </div>
         <div class="card-content">
           <?php if($message = $this->session->flashdata('message')): ?>

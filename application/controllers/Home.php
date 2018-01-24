@@ -12,7 +12,7 @@
       $data["pageTitle"] = "Beranda | Sistem Informasi Nilai Al-Ishlah";
 
       // Data ini akan ditampilkan di content.php
-      $data["pageContent"] = "";
+      $data['pageContent'] = $this->load->view('home/index', $data, TRUE);
 
       // Memanggil view layout.php
        $this->load->view("incsite/layout", $data);
