@@ -63,7 +63,7 @@ class Saran extends MY_Controller {
     public function sendMessage()
     {
         $this->db->insert('saran', array(
-            'message' => htmlentities($this->input->post('message', true)),
+            'messagesaran' => htmlentities($this->input->post('messagesaran', true)),
             'send_to' => $this->input->post('chatWith'),
             'send_by' => $this->user->id
         ));

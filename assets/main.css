@@ -79,3 +79,96 @@ header, main, footer {
 /* footer */
 
 /*chats*/
+/* message box header styles*/
+.msg-wgt-container {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 20px;
+    width: 250px !important;
+    height: 300px !important;
+    border: 1px solid #888888 !important;
+    background: #ffffff !important;
+    z-order: 10000 !important;
+}
+
+.minimize.msg-wgt-container {
+    height: 29px !important;
+}
+
+.msg-wgt-header {
+    width: 100% !important;
+    height: 30px !important;
+    line-height: 2.5em !important;
+    text-align: center !important;
+    background: #e9505d !important;
+}
+
+.msg-wgt-header a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.msg-wgt-header a.online {
+    width: 10px !important;
+    height: 10px !important;
+    background: #66d266 !important;
+    position: absolute !important;
+    left: 10px !important;
+    top: 10px !important;
+    border-radius: 10px !important;
+}
+
+.msg-wgt-header a.close {
+    position: absolute !important;
+    right: 10px !important;
+    opacity: .7 !important;
+}
+
+.msg-wgt-message-container {
+    width: 100% !important; 
+    height: 230px !important;
+    overflow-y: scroll !important;
+}
+
+.msg-wgt-message-list {
+    width: 100% !important;
+}
+
+tr.msg-wgt-message-list-header {
+    color: #999 !important;
+    font-size: 9px !important;
+    vertical-align: top !important;
+}
+
+tr.msg-wgt-message-list-header img {
+    width: 42px !important;
+}
+
+tr.msg-wgt-message-list-header .name {
+    text-align: left !important;
+}
+
+tr.msg-wgt-message-list-header .time {
+    text-align: right !important;
+}
+
+tr.msg-wgt-message-list-body td {
+    font-size: 11px !important;
+    color: #777 !important;
+}
+
+tr.msg-wgt-message-list-separator td {
+    border-bottom: 1px solid #ddd !important;
+}
+
+.msg-wgt-message-form {
+    width: 100% !important;
+    height: 40px !important;
+    border-top: 1px solid #ddd !important;
+}
+
+.msg-wgt-message-form textarea {
+    width: 98% !important;
+    border: 0 !important;
+    height: 40px !important;
+}

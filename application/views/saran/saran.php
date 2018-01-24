@@ -1,4 +1,3 @@
-<link href="<?php echo base_url(); ?>assets/styles.css" rel="stylesheet">
 <div class="row">
     <div class="col s12">
       <div class="card">
@@ -34,7 +33,7 @@
             </table>
         </div>
         <div class="msg-wgt-message-form">
-            <textarea name="message" placeholder="Type your message. Press Shift + Enter for newline"></textarea>
+            <textarea name="messagesaran" placeholder="Type your message. Press Shift + Enter for newline"></textarea>
         </div>
     </div>
 </div>
@@ -42,7 +41,7 @@
 <script type="text/x-template" id="msg-template" style="display: none">
     <tbody>
         <tr class="msg-wgt-message-list-header">
-            <!-- <td rowspan="2"><img src="<?= base_url('assets/avatar.png') ?>"></td> -->
+            <td rowspan="2"><img src="<?php base_url('assets/images/noavatar.png') ?>"></td>
             <td class="name"></td>
             <td class="time"></td>
         </tr>
@@ -59,13 +58,6 @@ jQuery(document).ready(function($) {
         false, // 1
         false, // 2
         false, // 3
-        false, // 4
-        false, // 5
-        false, // 6
-        false, // 7
-        false, // 8
-        false, // 9
-        false // 10
     ];
 
     // New chat
@@ -131,27 +123,25 @@ jQuery(document).ready(function($) {
                 var oldscrollHeight = $container[0].scrollHeight;
                 var oldLength = 0;
                 $.post('<?= site_url('saran/getChats') ?>', {chatWith: $data.chatWith}, function(data, textStatus, xhr) {
-                    $that.find('a.name').text(data.name);
+                    $that.find('a.name').text(data.username);
                     // from last
                     var chatLength = data.sarans.length;
                     var newIndex = data.sarans.length;
                     $.each(data.sarans, function(index, el) {
                         newIndex--;
-                        console.log(data.sarans[newIndex]);
                         var val = data.sarans[newIndex];
 
                         var tpl = $('#msg-template').html();
                         var tplBody = $('<div/>').append(tpl);
-                        var id = (val.chat_id +'_'+ val.send_by +'_'+ val.send_to).toString();
+                        var id = (val.id +'_'+ val.send_by +'_'+ val.send_to).toString();
                         
 
                         if ($that.find('#'+ id).length == 0) {
-                            tplBody.find('tbody').attr('id', id); // set class
-                            tplBody.find('td.name').text(val.name); // set name
+                            tplBody.find('tbody').attr('id',id); // set class
+                            tplBody.find('td.name').text(val.username); // set name
                             tplBody.find('td.time').text(val.time); // set time
-                            tplBody.find('.msg-wgt-message-list-body > td').html(nl2br(val.message)); // set message
+                            tplBody.find('.msg-wgt-message-list-body > td').html(nl2br(val.messagesaran)); // set message
                             $that.find('.msg-wgt-message-list').append(tplBody.html()); // append message
-
 
                             //Auto-scroll
                             var newscrollHeight = $container[0].scrollHeight - 20; //Scroll height after the request
@@ -166,7 +156,7 @@ jQuery(document).ready(function($) {
             $that.find('textarea').on('keydown', function(e) {
                 var $textArea = $(this);
                 if (e.keyCode === 13 && e.shiftKey === false) {
-                    $.post('<?= site_url('saran/sendMessage') ?>', {message: "tes", chatWith: $data.chatWith}, function(data, textStatus, xhr) {
+                    $.post('<?= site_url('saran/sendMessage') ?>', {messagesaran: $textArea.val(), chatWith: $data.chatWith}, function(data, textStatus, xhr) {
                     });
                     $textArea.val(''); // clear input
 
