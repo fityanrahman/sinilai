@@ -9,6 +9,10 @@ class Guru extends MY_Controller {
     // Cek apakah user sudah login
     $this->cekLogin();
 
+    // Cek apakah user login 
+    // sebagai administrator
+    $this->isAdmin();
+
     // Load model events
     $this->load->model('model_guru');
   }
