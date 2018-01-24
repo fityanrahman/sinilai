@@ -4,14 +4,23 @@
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
           <span class="card-title">Saran</span>
-          <a href="<?php echo base_url('siswa/add'); ?>" class="btn-floating right waves-effect waves-light amber tooltipped" data-position="top" data-tooltip="Tambah Data"><i class="material-icons">add</i></a>
+          <!-- debug query -->
+          <!-- <?php //$query =$this->db->last_query(); ?> -->
+          <!-- <?php //print_r($query);?>  -->
+          <!-- debug query -->
         </div>
         <div class="card-content">
         <h6>Kirim Saran ke</h6>
           <table class="bordered highlight">
           <?php foreach ($teman->result() as $item) { ?>
             <tr>
+                <?php if($this->session->userdata('level') === '2'){ ?>
+                <td><a href="javascript:;" data-friend="<?= $item->id ?>"><?= $item->nama_siswa ?></a></td>
+                <?php } else if($this->session->userdata('level') === '3'){ ?>
+                <td><a href="javascript:;" data-friend="<?= $item->id ?>"><?= $item->nama_guru ?></a></td>
+                <?php } else { ?>
                 <td><a href="javascript:;" data-friend="<?= $item->id ?>"><?= $item->username ?></a></td>
+                <?php } ?>
             </tr>
             <?php } ?>
           </table>
@@ -24,7 +33,7 @@
 <div id="wgt-container-template" style="display: none">
     <div class="msg-wgt-container">
         <div class="msg-wgt-header">
-            <a href="javascript:;" class="online"></a>
+            <!-- <a href="javascript:;" class="online"></a> -->
             <a href="javascript:;" class="name"></a>
             <a href="javascript:;" class="close">x</a>
         </div>

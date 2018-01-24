@@ -23,7 +23,35 @@ class Saran extends MY_Controller {
   {
     // Data untuk page index
     $data['pageTitle'] = 'Saran';
-    $data['teman'] = $this->db->where('id !=', $this->session->userdata('id'))->get('user');
+    if($this->session->userdata('level') === '2'){
+        $query = $this->db
+        ->select ('*')
+        ->from ('user')
+        ->join ('siswa', 'siswa.iduser_siswa = user.id')
+        // ->where('id !=', $this->session->userdata('id'))
+        ->where('level !=', $this->session->userdata('level'))
+        ->get();
+        $data['teman'] = $query;
+    } else if ($this->session->userdata('level') === '3'){
+        $query = $this->db
+        ->select ('*')
+        ->from ('user')
+        ->join ('guru', 'guru.iduser_guru = user.id')
+        // ->where('id !=', $this->session->userdata('id'))
+        ->where('level !=', $this->session->userdata('level'))
+        ->get();
+        $data['teman'] = $query;
+    } else{
+        $data['teman'] = $this->db->where('id !=', $this->session->userdata('id'))->get('user');
+    }
+    // $countChat= $this->db
+    //             ->select('send_by, send_to, count(send_by) as total')
+    //             ->from('saran')
+    //             ->where('send_by', =>$data->result('id'))
+    //             ->where('send_to', =>$this->session->userdata('id'))
+    //             ->get();
+    // $data['countChat']=$countChat;
+
     // $data['pageContent'] = $this->load->view('saran/saran', array(
     //   'teman' => $teman, 
     // ));
