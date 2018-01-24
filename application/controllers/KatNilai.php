@@ -125,7 +125,7 @@ class KatNilai extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data Nilai';
-    $data['katnilai'] = $this->model_kat_nilai->get()->row();
+    $data['katnilai'] = $this->model_kat_nilai->get_idmapel($this->session->userdata('id'))->row();
     // $data['katnilai'] = $this->model_kat_nilai->getListKatNilai($this->session->userdata('id'))->result();
     $data['pageContent'] = $this->load->view('katnilai/katnilaiadd', $data, TRUE);
 

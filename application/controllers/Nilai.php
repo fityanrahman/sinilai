@@ -195,7 +195,7 @@ class Nilai extends MY_Controller {
     // if($this->session->userdata('level') === '2'){
     // $data['katnilai'] = $this->model_kat_nilai->get_where(array('iduser_guru' => $this->session->userdata('id')))->result();
     // } else{
-    $data['katnilai'] = $this->model_kat_nilai->get()->result();
+    $data['katnilai'] = $this->model_kat_nilai->get_idkat($this->session->userdata('id'))->result();
     // }
     $data['kelas'] = $this->model_nilai->getListKelas();
     $data['pageContent'] = $this->load->view('nilai/nilaiAdd', $data, TRUE);

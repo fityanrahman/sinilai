@@ -30,7 +30,7 @@
           </div>
           <div class="input-field col s12 m6">
               <?php if ($this->session->userdata('level') === '2'){ ?>
-              <input id="idmapel" name="idmapel" type="text" value="<?php echo $katnilai->idmapel; ?>">
+              <input id="idmapel" name="idmapel" type="text" value="<?php echo $katnilai->idmapel_guru; ?>">
               <?php } else{ ?>
               <input id="idmapel" name="idmapel" type="text" value="<?php echo set_value('idmapel'); ?>">
               <?php } ?>

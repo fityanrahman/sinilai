@@ -21,7 +21,18 @@
       ->join('guru', 'guru.idmapel_guru = mapel.id', 'inner');
 
       return $this->db->get();
+   }
 
+   public function get_idkat($where=null)
+   {
+    if($where!==null){$this->db->where('iduser_guru', $where);}
+    $this->db
+      ->select('*')
+      ->from('kat_nilai')
+      ->join('mapel', 'mapel.id = kat_nilai.idmapel')
+      ->join('guru', 'guru.idmapel_guru = mapel.id');
+
+      return $this->db->get();
    }
 
   //  public function get_offset($limit, $offset, $where=null)

@@ -3,6 +3,10 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title"><?php echo $pageTitle; ?></span>
+        <!-- debug query -->
+          <?php $query =$this->db->last_query(); ?>
+          <?php print_r($query);?> 
+        <!-- debug query -->
       </div>
       <div class="card-content">
         <form class="row" id="add-user-form" method="post" action="">
