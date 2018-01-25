@@ -27,7 +27,7 @@
    {
     if($where!==null){$this->db->where('iduser_guru', $where);}
     $this->db
-      ->select('*')
+      ->select('nama_nilai, kat_nilai.id as `id_kat`')
       ->from('kat_nilai')
       ->join('mapel', 'mapel.id = kat_nilai.idmapel')
       ->join('guru', 'guru.idmapel_guru = mapel.id');

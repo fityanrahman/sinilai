@@ -29,7 +29,7 @@
                 <?php
                 foreach($katnilai as $row)
                 {
-                  echo '<option value="'.$row->id.'">'.$row->nama_nilai.'</option>';
+                  echo '<option value="'.$row->id_kat.'">'.$row->nama_nilai.'</option>';
                 }
                 ?>
                 </select>

@@ -20,8 +20,8 @@
                         <li><a href="<?php echo base_url('kelas'); ?>"><i class="material-icons">kitchen</i>Kelas</a></li>
                         <li><a href="<?php echo base_url('siswa'); ?>"><i class="material-icons">group</i>Siswa</a></li>
                         <?php endif; ?>
-                        <li><a href="<?php echo base_url('saran'); ?>"><i class="material-icons">lightbulb_outline</i>Saran</a></li>
                         <li><a href="<?php echo base_url('katNilai'); ?>"><i class="material-icons">assignment</i>Nilai</a></li>             
+                        <li><a href="<?php echo base_url('saran'); ?>"><i class="material-icons">lightbulb_outline</i>Saran</a></li>
 
                     <!-- <li><a class="waves-effect" href="<?php echo base_url('events'); ?>"><i class="material-icons">event</i>Events</a></li> -->
                     <li><div class="divider"></div></li>

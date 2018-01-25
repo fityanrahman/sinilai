@@ -5,8 +5,8 @@
         <div class="card-content">
           <span class="card-title">Data Nilai</span>
           <!-- debug query -->
-          <!-- <?php// $query =$this->db->last_query(); ?> -->
-          <!-- <?php// print_r($query);?>  -->
+          <?php $query =$this->db->last_query(); ?>
+          <?php print_r($query);?> 
           <!-- debug query -->
           <?php if($this->session->userdata('level') !== '3'): ?>
           <a href="<?php echo base_url('nilai/add'); ?>" class="btn-floating right waves-effect waves-light amber tooltipped" data-position="top" data-tooltip="Tambah Data"><i class="material-icons">add</i></a>
