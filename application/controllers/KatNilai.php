@@ -49,7 +49,7 @@ class KatNilai extends MY_Controller {
     // $judulnilai = $this->model_kat_nilai->get()->row();
 
     // Data untuk page index
-    $data['pageTitle'] = 'Data Nilai';
+    $data['pageTitle'] = 'Data Kategori Nilai';
     if($this->session->userdata('level') === '2'){
       $array_where = array(
           'iduser_guru'   => $this->session->userdata('id'),

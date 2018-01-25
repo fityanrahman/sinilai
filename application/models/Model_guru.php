@@ -50,8 +50,11 @@
     {
       // Jalankan query
       $query = $this->db
+        ->select('*')
+        ->from('mapel')
+        ->join('guru', 'guru.idmapel_guru = mapel.id')
         ->where($where)
-        ->get($this->table);
+        ->get();
 
       // Return hasil query
       return $query;

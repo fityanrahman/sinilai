@@ -28,7 +28,7 @@
                   <?php $no = 0; foreach($guru as $row): ?>
                     <tr>
                       <td><?php echo ++$no; ?></td>
-                      <td><?php echo $row->nama_guru; ?></td>
+                      <td><a href="<?php echo base_url('guru/detail/'.$row->nip);?>"</a> <?echo $row->nama_guru; ?></td>
                       <td><?php echo $row->nama_mapel; ?></td>                      
                       <td class="center-align">
                         <a href="<?php echo base_url('guru/edit/' . $row->nip); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Edit Data"><i class="material-icons">edit</i></a>

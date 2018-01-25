@@ -3,7 +3,7 @@
       <div class="card">
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
-          <span class="card-title">Data Nilai</span>
+          <span class="card-title">Data Kategori Nilai</span>
           <!-- debug query -->
           <!-- <?php// $query =$this->db->last_query(); ?> -->
           <!-- <?php// print_r($query);?>  -->

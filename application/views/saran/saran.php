@@ -42,7 +42,7 @@
             </table>
         </div>
         <div class="msg-wgt-message-form">
-            <textarea name="messagesaran" placeholder="Type your message. Press Shift + Enter for newline"></textarea>
+            <textarea name="messagesaran" placeholder="Ketik pesan di sini. Tekan Shift + Enter untuk baris baru"></textarea>
         </div>
     </div>
 </div>

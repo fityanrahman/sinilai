@@ -59,6 +59,20 @@ class Guru extends MY_Controller {
     $this->load->view('incsite/layout', $data);
   }
 
+  public function detail($nip)
+  {
+
+    // Ambil data user dari database
+
+    // Data untuk page detail
+    $data['pageTitle'] = 'Data Detail Guru';
+    $data['guru'] = $this->model_guru->get_where(array('nip' => $nip))->row();
+    $data['pageContent'] = $this->load->view('guru/guruDetail', $data, TRUE);
+
+    // Jalankan view template/layout
+    $this->load->view('incsite/layout', $data);
+  }
+
   public function add()
   {
     // Jika form di submit jalankan blok kode ini

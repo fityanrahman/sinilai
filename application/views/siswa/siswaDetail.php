@@ -3,7 +3,7 @@
       <div class="card">
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
-          <span class="card-title">Data siswa</span>
+          <span class="card-title"><?php echo $pageTitle; ?></span>
         </div>
         <div class="card-content">
           <table class="bordered highlight">

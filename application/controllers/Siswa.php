@@ -64,7 +64,7 @@ class Siswa extends MY_Controller {
     // Ambil data user dari database
 
     // Data untuk page detail
-    $data['pageTitle'] = 'Data Siswa';
+    $data['pageTitle'] = 'Data Detail Siswa';
     $data['siswa'] = $this->model_siswa->get_where(array('nis' => $nis))->row();
     $data['pageContent'] = $this->load->view('siswa/siswaDetail', $data, TRUE);
 

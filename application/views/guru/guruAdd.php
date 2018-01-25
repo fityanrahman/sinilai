@@ -81,7 +81,7 @@
               </select>
               <label>Mata Pelajaran</label>
           </div>
-          <div class="input-field col s12 m6">
+          <div hidden class="input-field col s12 m6">
               <input id="iduser_guru" name="iduser_guru" type="text" value="<?php echo $iduser->id; ?>">
               <label for="iduser_guru" class="">IDuser</label>
           </div>
