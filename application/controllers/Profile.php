@@ -121,10 +121,10 @@ class Profile extends MY_Controller {
         );
 
         // Ambil user ID
-        $ni = $this->session->userdata('ni');
+        $username = $this->session->userdata('username');
 
         // Jalankan function update pada model_user
-        $query = $this->model_user->update($ni, $data);
+        $query = $this->model_user->update($username, $data);
 
         // cek jika query berhasil
         if ($query) {
@@ -159,13 +159,13 @@ class Profile extends MY_Controller {
   public function cekPasswordLama()
   {
     // Ambil ni dari session
-    $ni = $this->session->userdata('ni');
+    $username = $this->session->userdata('username');
     
     // Ambil data password_lama dari POST
     $password = $this->input->post('password_lama');
 
     // Jalankan function cekPasswordLama pada model_user
-    $query = $this->model_user->cekPasswordLama($ni, $password);
+    $query = $this->model_user->cekPasswordLama($username, $password);
 
     // Jika query gagal maka return false
     if (!$query) {

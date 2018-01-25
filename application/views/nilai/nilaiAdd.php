@@ -4,8 +4,8 @@
       <div class="card-content">
         <span class="card-title"><?php echo $pageTitle; ?></span>
         <!-- debug query -->
-          <?php $query =$this->db->last_query(); ?>
-          <?php print_r($query);?> 
+          <!-- <?php //$query =$this->db->last_query(); ?> -->
+          <!-- <?php //print_r($query);?>  -->
         <!-- debug query -->
       </div>
       <div class="card-content">

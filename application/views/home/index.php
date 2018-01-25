@@ -3,7 +3,11 @@
       <div class="card">
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
-          <span class="card-title">Selamat Datang, <?php echo $this->session->userdata('username');?></span>
+        <?php if($this->session->userdata('level') !== '3'){ ?>
+          <span class="card-title">Selamat Datang, <?php echo ucfirst($this->session->userdata('username'));?></span>
+        <?php } else{ ?>
+          <span class="card-title">Selamat Datang, Wali <?php echo ucfirst($this->session->userdata('username'));?></span>
+        <?php } ?>
           <!-- debug query -->
           <!-- <?php //$query =$this->db->last_query(); ?> -->
           <!-- <?php //print_r($query);?>  -->

@@ -28,8 +28,11 @@ class Saran extends MY_Controller {
         ->select ('*')
         ->from ('user')
         ->join ('siswa', 'siswa.iduser_siswa = user.id')
+        // ->join ('saran', 'saran.send_to = siswa.iduser_siswa')
         // ->where('id !=', $this->session->userdata('id'))
         ->where('level !=', $this->session->userdata('level'))
+        // ->group_by('user.username')
+        // ->order_by('saran.time', 'DESC')
         ->get();
         $data['teman'] = $query;
     } else if ($this->session->userdata('level') === '3'){

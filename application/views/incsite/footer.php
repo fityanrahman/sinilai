@@ -19,7 +19,7 @@
   </div>
   <div class="footer-copyright">
     <div class="container cr">
-    © 2017 Madrasah Al-Ishlah 
+    Made With 	&hearts; Madrasah Diniyyah Al-Ishlah 2018
     <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
     </div>
   </div>
