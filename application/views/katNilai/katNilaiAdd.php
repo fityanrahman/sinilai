@@ -28,7 +28,7 @@
               <input id="tgl" class="datepicker" name="tgl" type="text" value="<?php echo set_value('tgl'); ?>">
               <label for="tgl" class="">Tanggal Kategori Nilai</label>
           </div>
-          <div class="input-field col s12 m6">
+          <div hidden class="input-field col s12 m6">
               <?php if ($this->session->userdata('level') === '2'){ ?>
               <input id="idmapel" name="idmapel" type="text" value="<?php echo $katnilai->idmapel_guru; ?>">
               <?php } else{ ?>

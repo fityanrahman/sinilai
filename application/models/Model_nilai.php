@@ -81,22 +81,22 @@
     }
     
 
-    public function update($id, $data)
+    public function update($id_nilai, $data)
     {
       // Jalankan query
       $query = $this->db
-        ->where('id', $id)
+        ->where('id', $id_nilai)
         ->update($this->table, $data);
       
       // Return hasil query
       return $query;
     }
 
-    public function delete($nis)
+    public function delete($id_nilai)
     {
       // Jalankan query
       $query = $this->db
-        ->where('nis', $nis)
+        ->where('id', $id_nilai)
         ->delete($this->table);
       
       // Return hasil query

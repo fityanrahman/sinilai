@@ -112,8 +112,8 @@ class KatNilai extends MY_Controller {
         $query = $this->model_kat_nilai->insert($data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data kat_nilai');
-        else $message = array('status' => true, 'message' => 'Gagal menambahkan Data kat_nilai');
+        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data Kategori Nilai');
+        else $message = array('status' => true, 'message' => 'Gagal menambahkan Data Kategori Nilai');
 
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);
@@ -124,7 +124,7 @@ class KatNilai extends MY_Controller {
     }
     
     // Data untuk page users/add
-    $data['pageTitle'] = 'Tambah Data Nilai';
+    $data['pageTitle'] = 'Tambah Data Kategori Nilai';
     $data['katnilai'] = $this->model_kat_nilai->get_idmapel($this->session->userdata('id'))->row();
     // $data['katnilai'] = $this->model_kat_nilai->getListKatNilai($this->session->userdata('id'))->result();
     $data['pageContent'] = $this->load->view('katnilai/katnilaiadd', $data, TRUE);

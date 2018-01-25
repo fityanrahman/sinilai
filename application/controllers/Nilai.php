@@ -254,7 +254,7 @@ class Nilai extends MY_Controller {
     }
     
     // Ambil data user dari database
-    $nilai = $this->model_nilai->get_where(array('id' => $id_nilai))->row();
+    $nilai = $this->model_nilai->get_where(array('nilai.id' => $id_nilai))->row();
   
   
     // Jika data user tidak ada maka show 404
@@ -273,16 +273,16 @@ class Nilai extends MY_Controller {
     $this->load->view('incsite/layout', $data);
   }
 
-  public function delete($nis)
+  public function delete($id_nilai)
   {
     // Ambil data user dari database
-    $siswa = $this->model_siswa->get_where(array('nis' => $nis))->row();
+    $nilai = $this->model_nilai->get_where(array('nilai.id' => $id_nilai))->row();
 
     // Jika data user tidak ada maka show 404
-    if (!$siswa) show_404();
+    if (!$nilai) show_404();
 
     // Jalankan function delete pada model_events
-    $query = $this->model_siswa->delete($nis);
+    $query = $this->model_nilai->delete($id_nilai);
 
     // cek jika query berhasil
     if ($query) $message = array('status' => true, 'message' => 'Berhasil menghapus event');
@@ -292,6 +292,6 @@ class Nilai extends MY_Controller {
     $this->session->set_flashdata('message', $message);
 
     // refresh page
-    redirect('siswa', 'refresh');
+    redirect('nilai', 'refresh');
   }
 }
