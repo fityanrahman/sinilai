@@ -99,7 +99,7 @@ class Guru extends MY_Controller {
           'merit' => $this->input->post('merit'),
           'tlp' => $this->input->post('tlp'),
           'email' => $this->input->post('email'),
-          'idmapel' => $this->input->post('idmapel'),
+          'idmapel_guru' => $this->input->post('idmapel_guru'),
           'iduser_guru' => $this->input->post('iduser_guru'),
         );
 
@@ -154,7 +154,7 @@ class Guru extends MY_Controller {
           'merit' => $this->input->post('merit'),
           'tlp' => $this->input->post('tlp'),
           'email' => $this->input->post('email'),
-          'idmapel' => $this->input->post('idmapel'),
+          'idmapel_guru' => $this->input->post('idmapel_guru'),
           'iduser_guru' => $this->input->post('iduser_guru'),
         );
 
@@ -162,8 +162,8 @@ class Guru extends MY_Controller {
         $query = $this->model_guru->update($nip, $data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui Mata Pelajaran');
-        else $message = array('status' => true, 'message' => 'Gagal memperbarui Mata Pelajaran');
+        if ($query) $message = array('status' => true, 'message' => 'Berhasil memperbarui Data Guru');
+        else $message = array('status' => true, 'message' => 'Gagal memperbarui Data Guru');
 
         // simpan message sebagai session
         $this->session->set_flashdata('message', $message);

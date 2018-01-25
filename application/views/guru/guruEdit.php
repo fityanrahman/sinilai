@@ -71,11 +71,11 @@
               <label for="email" class="">Email</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="idmapel" name="idmapel">
+              <select id="idmapel_guru" name="idmapel_guru">
               <?php
               foreach($mapel as $row)
               {
-                if ($guru->idmapel==$row->id){
+                if ($guru->idmapel_guru==$row->id){
                 echo '<option value="'.$row->id.'" selected>'.$row->nama_mapel.'</option>';
               } else {
                 echo '<option value="'.$row->id.'">'.$row->nama_mapel.'</option>';
@@ -86,8 +86,8 @@
               <label>Mata Pelajaran</label>
           </div>
           <div class="input-field col s12 m6">
-              <input id="iduser_siswa" name="iduser_siswa" type="text" value="<?php echo $guru->iduser_guru; ?>">
-              <label for="iduser_siswa" class="">IDuser</label>
+              <input id="iduser_guru" name="iduser_guru" type="text" value="<?php echo $guru->iduser_guru; ?>">
+              <label for="iduser_guru" class="">IDuser</label>
           </div>
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="<?php echo $guru->nip; ?>" class="btn amber waves-effect waves-green">Simpan</button>

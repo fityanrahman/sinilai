@@ -71,7 +71,7 @@
               <label for="email" class="">Email</label>
           </div>
           <div class="input-field col s12 m6">
-              <select id="idmapel" name="idmapel">
+              <select id="idmapel_guru" name="idmapel_guru">
               <?php
               foreach($mapel as $row)
               {
