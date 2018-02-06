@@ -16,7 +16,7 @@
                         <li><a href="<?php echo base_url()?>"><i class="material-icons">home</i>Beranda</a></li>
                         <?php if($this->session->userdata('level') === '1'): ?>
                         <li><a href="<?php echo base_url('guru'); ?>"><i class="material-icons">accessibility</i>Guru</a></li>
-                        <li><a href="<?php echo base_url('mapel'); ?>"><i class="material-icons">book</i>Mapel</a></li>
+                        <li><a href="<?php echo base_url('mapel'); ?>"><i class="material-icons">book</i>Mata Pelajaran</a></li>
                         <li><a href="<?php echo base_url('kelas'); ?>"><i class="material-icons">kitchen</i>Kelas</a></li>
                         <li><a href="<?php echo base_url('siswa'); ?>"><i class="material-icons">group</i>Siswa</a></li>
                         <?php endif; ?>

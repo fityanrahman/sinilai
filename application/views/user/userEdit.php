@@ -20,6 +20,10 @@
               </div>
             </div>
           <?php endif; ?>
+          <div hidden class="input-field col s12 m6">
+              <input id="id" name="id" type="text" value="<?php echo $user->id; ?>">
+              <label for="id" class="">id</label>
+          </div>
           <div class="input-field col s12 m6">
               <input id="username" name="username" type="text" value="<?php echo $user->username; ?>">
               <label for="username" class="">Username</label>
@@ -30,7 +34,7 @@
           </div>
           <div class="input-field col s12 m6">
               <select id="level" name="level">
-                  <option <?php echo ($user->level === '1') ? 'selected' : ''; ?> value="1">Admin</option>
+                  <!-- <option <?php //echo ($user->level === '1') ? 'selected' : ''; ?> value="1">Admin</option> -->
                   <option <?php echo ($user->level === '2') ? 'selected' : ''; ?> value="2">Guru</option>
                   <option <?php echo ($user->level === '3') ? 'selected' : ''; ?> value="3">Siswa</option>
               </select>

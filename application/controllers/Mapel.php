@@ -50,7 +50,7 @@ class Mapel extends MY_Controller {
     // $this->pagination->initialize($config);
 
     // Data untuk page index
-    $data['pageTitle'] = 'Mata Pelajaran';
+    $data['pageTitle'] = 'Data Mata Pelajaran';
     // $data['mapel'] = $this->model_mapel->get_offset($config['per_page'], $config['offset'])->result();
     $data['mapel'] = $this->model_mapel->get_offset()->result();
     $data['pageContent'] = $this->load->view('mapel/mapelList', $data, TRUE);

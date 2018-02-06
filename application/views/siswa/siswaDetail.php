@@ -24,6 +24,9 @@
                     <th>Jenis Kelamin</th><td><?php echo $siswa->jk; ?></td>
                 </tr>
                 <tr>
+                    <th>Alamat</th><td><?php echo $siswa->alamat; ?></td>
+                </tr>
+                <tr>
                     <th>Nama Ayah</th><td><?php echo $siswa->nama_ayah; ?></td>
                 </tr>
                 <tr>

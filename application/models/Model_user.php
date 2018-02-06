@@ -81,11 +81,11 @@
       return $query;
     }
 
-    public function update($username, $data)
+    public function update($id, $data)
     {
       // Jalankan query
       $query = $this->db
-        ->where('username', $username)
+        ->where('id', $id)
         ->update($this->table, $data);
       
       // Return hasil query

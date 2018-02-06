@@ -192,11 +192,11 @@ class Nilai extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data Nilai Siswa';
-    // if($this->session->userdata('level') === '2'){
-    // $data['katnilai'] = $this->model_kat_nilai->get_where(array('iduser_guru' => $this->session->userdata('id')))->result();
-    // } else{
+     if($this->session->userdata('level') === '2'){
     $data['katnilai'] = $this->model_kat_nilai->get_idkat($this->session->userdata('id'))->result();
-    // }
+     } else{
+    $data['katnilai'] = $this->model_kat_nilai->get_idkat()->result();
+     }
     $data['kelas'] = $this->model_nilai->getListKelas();
     $data['pageContent'] = $this->load->view('nilai/nilaiAdd', $data, TRUE);
 

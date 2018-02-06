@@ -20,7 +20,7 @@ class User extends MY_Controller {
   public function index()
   {
     // Data untuk page index
-    $data['pageTitle'] = 'User';
+    $data['pageTitle'] = 'Data Pengguna';
     $data['user'] = $this->model_user->get()->result();
     $data['pageContent'] = $this->load->view('user/userList', $data, TRUE);
 
@@ -117,7 +117,7 @@ class User extends MY_Controller {
     }
     
     // Data untuk page user/add
-    $data['pageTitle'] = 'Tambah Data User';
+    $data['pageTitle'] = 'Tambah Data Pengguna';
     $data['ket'] = $alamat;
     $data['pageContent'] = $this->load->view('user/userAdd', $data, TRUE);
 
@@ -160,6 +160,7 @@ class User extends MY_Controller {
       if ($this->form_validation->run() === TRUE) {
 
         $data = array(
+          'id' => $this->input->post('id'),
           'username' => $this->input->post('username'),
           'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
           'level' => $this->input->post('level'),
@@ -188,7 +189,7 @@ class User extends MY_Controller {
     if (!$user) show_404();
 
     // Data untuk page user/add
-    $data['pageTitle'] = 'Edit Data User';
+    $data['pageTitle'] = 'Edit Data Pengguna';
     $data['user'] = $user;
     $data['pageContent'] = $this->load->view('user/userEdit', $data, TRUE);
 
