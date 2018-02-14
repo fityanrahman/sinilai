@@ -16,14 +16,14 @@
       return $query;
     }
 
-    public function getLastID()
-    {
-      // Jalankan query
-      $query = $this->db->query('SELECT * FROM user ORDER BY id DESC LIMIT 1');
+    // public function getLastID()
+    // {
+    //   // Jalankan query
+    //   $query = $this->db->query('SELECT * FROM user ORDER BY add_time DESC LIMIT 1');
 
-      // Return hasil query
-      return $query;
-    }
+    //   // Return hasil query
+    //   return $query;
+    // }
 
     public function getListMapel()
     {
@@ -60,12 +60,13 @@
       return $query;
     }
 
-    public function insert($data)
+    public function insert($table, $data)
     {
       // Jalankan query
-      $query = $this->db->insert($this->table, $data);
+      $query = $this->db->insert($table, $data);
 
       // Return hasil query
+      // return $this->db->insert_id();// return last insert id
       return $query;
     }
 
@@ -80,12 +81,12 @@
       return $query;
     }
 
-    public function delete($nip)
+    public function delete($iduser)
     {
       // Jalankan query
       $query = $this->db
-        ->where('nip', $nip)
-        ->delete($this->table);
+        ->where('id', $iduser)
+        ->delete('user');
       
       // Return hasil query
       return $query;

@@ -87,6 +87,17 @@ class Siswa extends MY_Controller {
       // Jalankan validasi jika semuanya benar maka lanjutkan
       if ($this->form_validation->run() === TRUE) {
 
+        $data1 = array(
+          'id' => $this->input->post('nis'),
+          'username' => $this->input->post('nama_siswa'),
+          'password' => password_hash($this->input->post('nis'), PASSWORD_DEFAULT),
+          'level' => $this->input->post('level'),
+          'active' => $this->input->post('active'),
+        );
+
+        // Jalankan function insert pada model_siswa
+        $insert_user = $this->model_siswa->insert('user',$data1);
+
         $data = array(
           'nis' => $this->input->post('nis'),
           'nama_siswa' => $this->input->post('nama_siswa'),
@@ -98,14 +109,14 @@ class Siswa extends MY_Controller {
           'nama_ibu' => $this->input->post('nama_ibu'),
           'agama' => $this->input->post('agama'),
           'idkelas' => $this->input->post('idkelas'),
-          'iduser_siswa' => $this->input->post('iduser_siswa'),
+          'iduser_siswa' => $this->input->post('nis'),
         );
 
-        // Jalankan function insert pada model_events
-        $query = $this->model_siswa->insert($data);
+        // Jalankan function insert pada model_siswa
+        $insert_siswa = $this->model_siswa->insert('siswa',$data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data siswa');
+        if ($insert_siswa) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data Guru');
         else $message = array('status' => true, 'message' => 'Gagal menambahkan Data siswa');
 
         // simpan message sebagai session
@@ -118,7 +129,7 @@ class Siswa extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data siswa';
-    $data['iduser'] = $this->model_siswa->getLastID()->row();
+    // $data['iduser'] = $this->model_siswa->getLastID()->row();
     $data['kelas'] = $this->model_siswa->getListKelas();
     $data['pageContent'] = $this->load->view('siswa/siswaAdd', $data, TRUE);
 
@@ -140,6 +151,14 @@ class Siswa extends MY_Controller {
 
       // Jalankan validasi jika semuanya benar maka lanjutkan
       if ($this->form_validation->run() === TRUE) {
+
+        $data1 = array(
+          'id' => $this->input->post('id'),
+          'username' => $this->input->post('username'),
+          'password' => $this->input->post('password'),
+          'level' => $this->input->post('level'),
+          'active' => $this->input->post('active'),
+        );
 
         $data = array(
           'nis' => $this->input->post('nis'),

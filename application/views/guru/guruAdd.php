@@ -81,10 +81,18 @@
               </select>
               <label>Mata Pelajaran</label>
           </div>
-          <div hidden class="input-field col s12 m6">
-              <input id="iduser_guru" name="iduser_guru" type="text" value="<?php echo $iduser->id; ?>">
-              <label for="iduser_guru" class="">IDuser</label>
+          <div class="input-field col s12 m6">
+              <input id="level" name="level" type="text" value="2">
+              <label for="level" class="">Level</label>
           </div>
+          <div class="input-field col s12 m6">
+              <input id="active" name="active" type="text" value="1">
+              <label for="active" class="">Active</label>
+          </div>
+          <!-- <div hidden class="input-field col s12 m6">
+              <input id="iduser_guru" name="iduser_guru" type="text" value="<?php// echo $iduser->id; ?>">
+              <label for="iduser_guru" class="">IDuser</label>
+          </div> -->
           <div class="input-field col s12 right-align">
               <button type="submit" name="submit" value="add_guru" class="btn amber waves-effect waves-green">Simpan</button>
           </div>

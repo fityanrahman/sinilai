@@ -6,7 +6,7 @@
     public function cekAkun($username, $password)
     {
       // Get data user yang mempunyai username == $username dan active == 1
-      $this->db->where('username', $username);
+      $this->db->where('id', $username);
       $this->db->where('active', '1');
 			
       // Jalankan query
@@ -23,7 +23,7 @@
       if (!password_verify($password, $hash)) return false;
  
       // Update last_login user
-      $last_login = $this->update($query->username, array('last_login' => date('Y-m-d H:i:s')));
+      $last_login = $this->update($query->id, array('last_login' => date('Y-m-d H:i:s')));
 
       // Jika username dan password benar maka return data user
       return $query;        

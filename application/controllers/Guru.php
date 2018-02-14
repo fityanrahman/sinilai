@@ -88,6 +88,18 @@ class Guru extends MY_Controller {
       // Jalankan validasi jika semuanya benar maka lanjutkan
       if ($this->form_validation->run() === TRUE) {
 
+        $data1 = array(
+          'id' => $this->input->post('nip'),
+          'username' => $this->input->post('nama_guru'),
+          'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT),
+          'level' => $this->input->post('level'),
+          'active' => $this->input->post('active'),
+        );
+
+        // Jalankan function insert pada model_guru
+        $insert_user = $this->model_guru->insert('user',$data1);
+
+
         $data = array(
           'nip' => $this->input->post('nip'),
           'nama_guru' => $this->input->post('nama_guru'),
@@ -100,14 +112,14 @@ class Guru extends MY_Controller {
           'tlp' => $this->input->post('tlp'),
           'email' => $this->input->post('email'),
           'idmapel_guru' => $this->input->post('idmapel_guru'),
-          'iduser_guru' => $this->input->post('iduser_guru'),
+          'iduser_guru' => $this->input->post('nip'),
         );
 
         // Jalankan function insert pada model_events
-        $query = $this->model_guru->insert($data);
+        $insert_guru = $this->model_guru->insert('guru',$data);
 
         // cek jika query berhasil
-        if ($query) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data Guru');
+        if ($insert_guru) $message = array('status' => true, 'message' => 'Berhasil menambahkan Data Guru');
         else $message = array('status' => true, 'message' => 'Gagal menambahkan Data Guru');
 
         // simpan message sebagai session
@@ -120,7 +132,7 @@ class Guru extends MY_Controller {
     
     // Data untuk page users/add
     $data['pageTitle'] = 'Tambah Data Guru';
-    $data['iduser'] = $this->model_guru->getLastID()->row();
+    // $data['iduser'] = $this->model_guru->getLastID()->row();
     $data['mapel'] = $this->model_guru->getListMapel();
     $data['pageContent'] = $this->load->view('guru/guruAdd', $data, TRUE);
 
@@ -193,16 +205,16 @@ class Guru extends MY_Controller {
     $this->load->view('incsite/layout', $data);
   }
 
-  public function delete($nip)
+  public function delete($iduser)
   {
     // Ambil data user dari database
-    $guru = $this->model_guru->get_where(array('nip' => $nip))->row();
+    $guru = $this->model_guru->get_where(array('iduser_guru' => $iduser))->row();
 
     // Jika data user tidak ada maka show 404
     if (!$guru) show_404();
 
     // Jalankan function delete pada model_events
-    $query = $this->model_guru->delete($nip);
+    $query = $this->model_guru->delete($iduser);
 
     // cek jika query berhasil
     if ($query) $message = array('status' => true, 'message' => 'Berhasil menghapus event');

@@ -12,14 +12,14 @@
       return $query;
     }
 
-    public function getLastID()
-    {
-      // Jalankan query
-      $query = $this->db->query('SELECT * FROM user ORDER BY id DESC LIMIT 1');
+    // public function getLastID()
+    // {
+    //   // Jalankan query
+    //   $query = $this->db->query('SELECT * FROM user ORDER BY id DESC LIMIT 1');
 
-      // Return hasil query
-      return $query;
-    }
+    //   // Return hasil query
+    //   return $query;
+    // }
 
     public function getListKelas()
     {
@@ -55,13 +55,13 @@
       return $query;
     }
 
-    public function insert($data)
+    public function insert($table, $data)
     {
       // Jalankan query
-      $query = $this->db->insert($this->table, $data);
+      $query = $this->db->insert($table, $data);
 
       // Return hasil query
-      return $query;
+      return $this->db->insert_id();// return last insert id
     }
 
     public function update($nis, $data)

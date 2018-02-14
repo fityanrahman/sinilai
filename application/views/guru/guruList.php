@@ -4,7 +4,7 @@
         <!-- <div class="card-content light-blue lighten-1 white-text"> -->
         <div class="card-content">
           <span class="card-title">Data Guru</span>
-          <a href="<?php echo base_url('user/add/guru'); ?>" class="btn-floating right waves-effect waves-light amber tooltipped" data-position="top" data-tooltip="Tambah Data"><i class="material-icons">add</i></a>
+          <a href="<?php echo base_url('guru/add'); ?>" class="btn-floating right waves-effect waves-light amber tooltipped" data-position="top" data-tooltip="Tambah Data"><i class="material-icons">add</i></a>
         </div>
         <div class="card-content">
           <?php if($message = $this->session->flashdata('message')): ?>
@@ -28,11 +28,11 @@
                   <?php $no = 0; foreach($guru as $row): ?>
                     <tr>
                       <td><?php echo ++$no; ?></td>
-                      <td><a href="<?php echo base_url('guru/detail/'.$row->nip);?>"</a> <?echo $row->nama_guru; ?></td>
+                      <td><a href="<?php echo base_url('guru/detail/'.$row->nip);?>"</a> <?php echo $row->nama_guru; ?></td>
                       <td><?php echo $row->nama_mapel; ?></td>                      
                       <td class="center-align">
                         <a href="<?php echo base_url('guru/edit/' . $row->nip); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Edit Data"><i class="material-icons">edit</i></a>
-                        <a href="<?php echo base_url('guru/delete/' . $row->nip); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Delete Data"><i class="material-icons">delete</i></a>
+                        <a href="<?php echo base_url('guru/delete/' . $row->iduser_guru); ?>" class="btn-floating waves-effect waves-light tooltipped" data-position="top" data-tooltip="Delete Data"><i class="material-icons">delete</i></a>
                       </td>
                     </tr>
                   <?php endforeach; ?>
